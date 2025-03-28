@@ -20,21 +20,12 @@ export default (props) => {
   if (isPage1) itemCount = <div>{`About ${count} results`}</div>;
 
   return (
-    <div className="block w-full min-h-full mx-auto">
+    <div className="w-full min-h-full mx-auto ">
       <div className="w-auto mb-10 text-lg">
         {itemCount}
       </div>
-      <div className="
-        flex
-        flex-row
-        flex-wrap
-        gap-8
-        justify-center
-        sm:justify-center
-        md:justify-between
-        xl:justify-start
-        xl:gap-[2.75rem]
-        w-full"
+      <div className=" w-full
+        grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-16"
       >
         {propertiesInDom}
       </div>

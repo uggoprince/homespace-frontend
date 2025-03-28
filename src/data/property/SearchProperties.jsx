@@ -15,7 +15,7 @@ const SearchProperties = (props) => {
     return `Error! ${error.message}`;
   }
   return (
-    <>
+    <div className="searchProperties">
       {data && data?.getProperties && (
       <HomePropertyAdapter
         number={searchType}
@@ -24,7 +24,7 @@ const SearchProperties = (props) => {
         offset={offset}
       />
       )}
-    </>
+    </div>
   );
 };
 
