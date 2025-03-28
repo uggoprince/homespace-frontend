@@ -13,9 +13,10 @@
 .hero {
     width: 100%;
     height: min-content;
-    overflow: auto;
+    /* overflow: auto; */
     position: relative;
     z-index: 2;
+    @apply flex flex-col justify-center flex-1;
 }
   
 .master::before {

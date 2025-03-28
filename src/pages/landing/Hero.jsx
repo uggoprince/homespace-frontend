@@ -1,25 +1,26 @@
 const Hero = () => (
-  <div className="hero flex-grow">
-    <div className="my-36 object-none object-center">
+  <div className="hero">
+    <div className="w-full object-none object-center flex flex-col justify-center gap-12">
       <div className="hs-text-center">
-        <div className="hero-text-1 text-6xl text-indigo-600 font-bold font-serif">Find A Space</div>
+        <div className="text-6xl text-indigo-600 font-bold font-serif">Find A Space</div>
       </div>
-      <div className="hs-text-center hs-pt-60 hs-pb-40 flex-grow">
+      <div className="hs-text-center flex-grow pb-6">
         <form id="searchForm" method="POST">
           <input
+            required
             name="searchText"
             id="homeSearchTextInput"
             placeholder="Address, City, Neighborhood..."
             type="search"
             className="
-          border-transparent
-          focus:outline-none
-          focus:ring-2
-          focus:ring-indigo-600
-          focus:border-transparent
-          py-4 px-4
-          rounded-tl rounded-bl
-          w-2/5 min-w-min"
+              border-transparent
+              focus:outline-none
+              focus:ring-2
+              focus:ring-indigo-600
+              focus:border-transparent
+              py-4 px-4
+              rounded-tl rounded-bl
+              w-2/5 min-w-min"
           />
           <button
             id="searchButton"

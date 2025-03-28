@@ -19,12 +19,12 @@ class LandingPage extends Component {
   render() {
     return (
       <BaseLayout>
-        {/* <div className="2xl:container min-ht-vh master relative"> */}
-        <Header />
-        <HeaderBottomMargin />
-        <Hero />
-        <Footer />
-        {/* </div> */}
+        <div className="w-full h-full relative flex flex-col">
+          <Header />
+          {/* <HeaderBottomMargin /> */}
+          <Hero />
+          <Footer />
+        </div>
       </BaseLayout>
     );
   }

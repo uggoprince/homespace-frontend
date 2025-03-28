@@ -8,7 +8,7 @@ const Properties = (props) => {
   if (property) propertyPresent = true;
   return (
     <div className="container hs-max-width-85 hs-pb-100">
-      <div className="flex flex-row flex-nowrap">
+      <div className="w-full h-auto">
         <div id={`propertiesDiv${number}`} className="transition-width">
           {children}
         </div>
