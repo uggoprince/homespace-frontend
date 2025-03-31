@@ -13,12 +13,14 @@ const runSearch = (form) => {
     // computeSearchUrl(searchText);
     let { value } = searchText;
     value = value.trim();
-    const newUrl = computeSearchUrl(value);
-    setNewState({ type: 'SEARCH_PROPERTIES', q: value, start: 0 });
-    // setSearchUrl(newUrl);
-    setUrlOnAddressBar(newUrl, 'Home');
+    if (value !== '' && value != null) {
+      const newUrl = computeSearchUrl(value);
+      setNewState({ type: 'SEARCH_PROPERTIES', q: value, start: 0 });
+      // setSearchUrl(newUrl);
+      setUrlOnAddressBar(newUrl, 'Home');
     //
     // history.push(newUrl);
+    }
   } else if (searchTextForAgency) {
     let { value } = searchTextForAgency;
     value = value.trim();
@@ -76,7 +78,9 @@ export const displayCardDetails = (e, property, num) => {
   const propertiesDiv = document.getElementById(`propertiesDiv${num}`);
   propertyDetailsDiv.classList.remove('hidden');
   propertiesDiv.style.width = '60%';
+  // propertiesDiv.style.maxWidth = '60%';
   propertyDetailsDiv.style.width = '40%';
+  // propertyDetailsDiv.style.maxWidth = '40%';
   propertyDetailsDiv.style.minWidth = '400px';
 };
 

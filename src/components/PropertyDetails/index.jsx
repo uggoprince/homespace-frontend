@@ -59,7 +59,7 @@ export default (props) => {
   };
   return (
     <div id="propertyDiv" className="propertyDetails">
-      <div className="pb-2 flex flex-row">
+      <div className="pb-2 pt-5 flex flex-row sticky top-0 bg-white">
         <div className="flex-1 ">
           <FaTimes
             onClick={(e) => { closeCardDetails(e, number); }}
@@ -78,8 +78,8 @@ export default (props) => {
           />
         </div>
       </div>
-      <div id="propertyDetailsFromSearchDivContent">
-        <div className="w-full inline-block">
+      <div id="propertyDetailsFromSearchDivContent" className=" overflow-y-scroll h-full w-full">
+        <div className="w-full inline-block min-h-[600px] pb-52">
           <div className="w-12/12 content-center">
             <img id="detailsDivImg" src={photo1} alt={property.title} className=" m-auto object-center h-72" />
           </div>

@@ -35,6 +35,10 @@
   min-height: 100vh;
 }
 
+.hs-max-width-95 {
+  max-width: 95%;
+}
+
 .hs-max-width-90 {
   max-width: 90%;
 }

@@ -1,6 +1,7 @@
 .prop-card {
-    min-width: 300px;
-    max-width: 300px;
+    /* min-width: 280px; */
+    width: 100%;
+    max-width: 280px;
     box-shadow: 0px 0px 5px #aaaaaa;
     @apply rounded-lg cursor-pointer self-start font-roboto text-textColor
 }

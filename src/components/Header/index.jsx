@@ -16,9 +16,19 @@ const SearchBar = (props) => {
   }, [search]);
   if (!inputName) inputName = 'searchText';
   return (
-    <div className="search-bar hs-max-width-85">
-      <form id="searchForm2" className="search-bar-form">
+    <div className="search-bar hs-max-width-95 flex flex-col justify-items-center">
+      <form
+        id="searchForm2"
+        className="search-bar-form self-center"
+        // onSubmit={(e) => {
+        //   e.preventDefault();
+        //   const formData = new FormData(e.target);
+        //   const searchValue = formData.get(inputName); // Get input value
+        //   console.log('Search Value:', searchValue);
+        // }}
+      >
         <input
+          required
           type="search"
           name={inputName}
           id="searchPageSearchTextInput"

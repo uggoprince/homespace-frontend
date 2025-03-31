@@ -25,7 +25,7 @@ export default (props) => {
         {itemCount}
       </div>
       <div className=" w-full
-        grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-16"
+        grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 justify-items-center"
       >
         {propertiesInDom}
       </div>
