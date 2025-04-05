@@ -41,7 +41,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-center flex-1">
       <div className="container content-center">
         <div className="flex flex-row pt-16 pb-28">
           <Form submithandler={auth} method="POST" id="loginForm" formclass="loginForm shadow-2xl">
