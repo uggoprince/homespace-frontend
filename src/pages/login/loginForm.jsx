@@ -23,7 +23,7 @@ const LoginForm = () => {
     });
   useEffect(() => {
     if (loading) {
-      alertLoadingId = notify('Logging In...', 1);
+      alertLoadingId = notify('Signing In...', 1);
     }
     if (data) {
       toast.remove(alertLoadingId);
@@ -41,10 +41,14 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center flex-1">
-      <div className="container content-center">
-        <div className="flex flex-row pt-16 pb-28">
-          <Form submithandler={auth} method="POST" id="loginForm" formclass="loginForm shadow-2xl">
+    <div className="flex flex-col justify-center flex-1 flex-shrink w-full h-full overflow-y-scroll">
+      <div className="container flex flex-col justify-around h-full">
+        {/* <div className="flex flex-row pt-16 pb-28"> */}
+        <Form submithandler={auth} method="POST" id="loginForm" formclass="loginForm shadow-2xl flex flex-col gap-3">
+          <div className="w-full">
+            <span>Login</span>
+          </div>
+          <div className="w-full overflow-y-scroll flex flex-col gap-2 py-3">
             <InputContainer>
               <TextField
                 name="email"
@@ -62,11 +66,12 @@ const LoginForm = () => {
                 required
               />
             </InputContainer>
-            <InputContainer>
-              <Button id="loginButton" type="submit" text="Login" />
-            </InputContainer>
-          </Form>
-        </div>
+          </div>
+          <InputContainer>
+            <Button id="loginButton" type="submit" text="Login" />
+          </InputContainer>
+        </Form>
+        {/* </div> */}
       </div>
       <Alert />
     </div>

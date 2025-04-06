@@ -11,7 +11,7 @@ class Login extends Component {
   render() {
     return (
       <BaseLayout>
-        <div className="w-full h-full flex flex-col relative">
+        <div className="w-full h-dvh flex flex-col relative master">
           <Header />
           <LoginForm />
           <Footer />
