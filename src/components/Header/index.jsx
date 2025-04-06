@@ -65,7 +65,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className="max-width header">
+      <header className="header">
         <div className="header-nav">
           <Logo />
           <Navigation />

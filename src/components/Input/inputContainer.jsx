@@ -1,6 +1,6 @@
 const Block = (props) => {
   const { classlist, children } = props;
-  const classname = `pb-5 ${classlist}`;
+  const classname = `${classlist}`;
   return (
     <div className={classname}>{children}</div>
   );

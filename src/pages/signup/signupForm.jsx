@@ -13,6 +13,7 @@ import Form from '../../components/Form';
 import { register } from '../../data/user/fieldProcessor';
 import { formErrorHandler } from '../../data/errorHandler';
 import { mutateApi } from '../../Utils/Api';
+import { Group } from '../../components/Form/group';
 
 const SignupForm = () => {
   const { errors, setErrors } = useForm();
@@ -39,43 +40,50 @@ const SignupForm = () => {
   };
 
   return (
-    <div>
-      <div className="container content-center">
-        <div className="flex flex-row pt-10 pb-28">
-          <Form submithandler={auth} method="POST" id="signupForm" formclass="signupForm shadow-2xl">
-            <div className="w-full inline-block">
-              <Container2 classlist="float-left">
+    <div className="flex-1 flex-shrink w-full h-full overflow-y-scroll">
+      <div className="container flex flex-col justify-around h-full">
+        {/* <div className="w-full bg-red-900"> */}
+        <Form submithandler={auth} method="POST" id="signupForm" formclass="signupForm shadow-2xl max-h-[80%] flex flex-col gap-3">
+          <div className="w-full">
+            <span>Create Account</span>
+          </div>
+          <div className="w-full overflow-y-scroll flex flex-col gap-2 py-3">
+            <Group>
+              <Container2>
                 <TextField name="firstname" label="First Name" error={errors.firstname} required />
               </Container2>
-              <Container2 classlist="float-right">
+              <Container2>
                 <TextField name="lastname" label="Last Name" error={errors.lastname} required />
               </Container2>
-            </div>
-            <div className="w-full inline-block">
-              <Container2 classlist="float-left">
+            </Group>
+            <Group>
+              <Container2>
                 <TextField name="country" label="Country" error={errors.country} required />
               </Container2>
-              <Container2 classlist="float-right">
+              <Container2>
                 <TextField name="state" label="State" error={errors.state} required />
               </Container2>
-            </div>
+            </Group>
             <Container>
               <TextField name="address" label="Address" type="text" error={errors.address} required />
             </Container>
             <Container>
               <TextField name="email" label="Email" error={errors.email} type="email" autoComplete="email" required />
             </Container>
-            <Container>
-              <PasswordTextField name="password" label="Password" error={errors.password} required />
-            </Container>
-            <Container>
-              <PasswordTextField name="confirmPassword" label="Confirm Password" error={errors.confirmPassword} required />
-            </Container>
-            <Container>
-              <Button id="signupButton" type="submit" text="Sign Up" />
-            </Container>
-          </Form>
-        </div>
+            <Group>
+              <Container2>
+                <PasswordTextField name="password" label="Password" error={errors.password} required />
+              </Container2>
+              <Container2>
+                <PasswordTextField name="confirmPassword" label="Confirm Password" error={errors.confirmPassword} required />
+              </Container2>
+            </Group>
+          </div>
+          <Container>
+            <Button id="signupButton" type="submit" text="Sign Up" />
+          </Container>
+        </Form>
+        {/* </div> */}
       </div>
       <Alert />
     </div>

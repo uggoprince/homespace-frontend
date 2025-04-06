@@ -9,7 +9,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="w-full min-ht-vh relative master">
+      <div className="w-full h-dvh flex flex-col relative master">
         <Header />
         <SignupForm />
         <Footer />
