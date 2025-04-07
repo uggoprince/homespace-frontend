@@ -1,5 +1,8 @@
 .agency-card {
     box-shadow: 0px 0px 4px #bbb;
+    min-width: 200px;
+    max-width: 300px;
+    width: 280px;
     @apply
     bg-white
     flex-1
@@ -7,13 +10,13 @@
     inline-block
     rounded-lg
     text-textColor
-    font-open_sans
+    font-open_sans;
 }
 .card-header {
     @apply px-2 py-2
 }
 .headline {
-    @apply cursor-pointer text-tertiary hover:text-indigo-500 font-semibold hover:font-bold
+    @apply cursor-pointer text-tertiary hover:text-indigo-500 font-semibold hover:font-bold;
 }
 
 .agency-image {
@@ -21,14 +24,14 @@
     height: 200px;
     background-repeat: no-repeat;
     background-size: cover;
-    @apply bg-slate-300
+    @apply bg-slate-300;
 }
 .text-section {
-    @apply px-2 py-2 flex flex-col text-sm
+    @apply px-2 py-2 flex flex-col text-sm;
 }
 .subhead {
-    @apply font-semibold truncate text-tertiary pb-1
+    @apply font-semibold truncate text-tertiary pb-1;
 }
 .supporting-text {
-    @apply flex flex-row items-baseline
+    @apply flex flex-row items-baseline;
 }

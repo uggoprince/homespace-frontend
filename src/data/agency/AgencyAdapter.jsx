@@ -37,7 +37,11 @@ export default (props) => {
   return (
     <div className="w-full mb-40">
       <div className="w-auto mb-10 text-lg" />
-      <div id={id} ref={getAgencyDivRef()} className="grid lg:grid-cols-3 sm:grid-cols-2 gap-7 flex-wrap w-full whitespace-normal">
+      <div
+        id={id}
+        ref={getAgencyDivRef()}
+        className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 justify-items-center w-full "
+      >
         {[...agencies].map((obj) => returnAgencyCard(obj))}
       </div>
       <div className="mt-16 w-full">

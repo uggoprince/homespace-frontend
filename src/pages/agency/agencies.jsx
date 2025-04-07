@@ -12,10 +12,10 @@ class AgenciesPage extends Component {
   render() {
     const { w } = this.props;
     return (
-      <div className="w-full min-ht-vh relative">
+      <div className="w-full min-ht-vh flex flex-col relative">
         <Header />
         <AgenciesView>
-          <HeaderBottomMargin />
+          {/* <HeaderBottomMargin /> */}
           <Agencies query={GET_AGENCIES} queryName="getAgencies" />
         </AgenciesView>
       </div>
