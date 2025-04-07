@@ -110,8 +110,8 @@ export const moveToNewAgencyPage = (data) => {
   const offset = selected * 10;
   const { q } = getSearchString();
   let newUrl;
-  if (q) newUrl = computeSearchUrl(q, offset, '/agency');
-  else newUrl = computeSearchUrl(null, offset, '/agency');
+  if (q) newUrl = computeSearchUrl(q, offset, '/agencies');
+  else newUrl = computeSearchUrl(null, offset, '/agencies');
   setUrlOnAddressBar(newUrl, 'Agency');
   setNewState({ type: 'SET_OFFSET_AGENCY', start: offset });
 };
