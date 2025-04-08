@@ -90,12 +90,15 @@ export const SelectField = (props) => {
   const [value, setValue] = useState('');
   let index = -1;
   const {
-    options = [''], label, error = null, name, extraFunction,
+    options = [''], label, error = null, name, extraFunction, getIndex,
   } = props;
   const handleChange = (event) => {
     setValue(event.target.value);
     if (extraFunction) {
       extraFunction(event.target.value);
+    }
+    if (getIndex) {
+      getIndex(index);
     }
   };
   return (

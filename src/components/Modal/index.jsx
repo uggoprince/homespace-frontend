@@ -8,7 +8,7 @@ import './style.css';
 const Modal = ({
   show, children, handleClose, header,
 }) => {
-  const toggleShowClassName = show ? 'block w-full h-full' : 'hidden';
+  const toggleShowClassName = show ? 'block w-full h-full absolute z-10' : 'hidden';
   return (
     <div className={toggleShowClassName}>
       <div className="modal-container">
@@ -26,7 +26,7 @@ const Modal = ({
               className="bg-gray-500 hover:bg-red-500 text-white text-3xl order-last cursor-pointer rounded-full p-2"
             />
           </div>
-          <div className="overflow-y-auto w-auto h-auto">
+          <div className="w-full max-h-full flex-1">
             {children}
           </div>
         </section>

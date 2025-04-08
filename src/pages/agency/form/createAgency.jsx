@@ -17,7 +17,8 @@ import Alert, { notify } from '../../../components/Alert';
 // import { PATHS } from '../../../Utils/paths';
 import { useAuth } from '../../../auth/AuthProvider';
 import { updateLocalStorage } from '../../../Utils/LocalStorage';
-import { countryNameToCode, getCountriesApiUrl, getCountryStatesApiUrl } from '../../../Utils/constants';
+import { Group } from '../../../components/Form/group';
+import { getCountries, getStates } from 'country-state-picker';
 
 export default (props) => {
   const {
@@ -25,6 +26,7 @@ export default (props) => {
   } = props;
   const [country, setCountry] = useState(null);
   const [states, setStates] = useState(null);
+  const [countryIndex, setCountryIndex] = useState(null);
   const { errors, setErrors } = useForm();
   const navigate = useNavigate();
   const [createAgency, { loading, error, data }] = mutateApi(CREATE_AGENCY);
@@ -56,18 +58,15 @@ export default (props) => {
   useEffect(() => {
     if (modalIsOpen) {
       if (countries.length < 1) {
-        fetchApi(getCountriesApiUrl).then(({ data }) => {
-          setCountries(data);
-        });
+        setCountries(getCountries());
       }
     }
   });
   useEffect(() => {
     if (country) {
-      fetchApi(`${getCountryStatesApiUrl}${countryNameToCode[country]}`)
-        .then(({ data }) => {
-          setStates(data);
-        });
+      const countryCode = countries[countryIndex].code;
+      const states = getStates(countryCode);
+      setStates(states);
     }
   }, [country]);
   if (error && error.message === 'Your session expired. Sign in again.') {
@@ -77,25 +76,31 @@ export default (props) => {
     createTheAgency(e, createAgency);
   };
   return (
-    <div>
-      <div className="container content-center">
-        <div className="">
-          <Form submithandler={createIt} method="POST" id="createAgencyForm" formclass="createAgencyForm">
-            <div className="w-full flex flex-col md:flex-row gap-x-4 items-start">
+    <div className="container content-center h-full flex-1">
+      <div className="w-full h-full">
+        <Form
+          submithandler={createIt}
+          method="POST"
+          id="createAgencyForm"
+          formclass="createAgencyForm flex flex-col gap-3 max-h-full"
+        >
+          <div className="w-full overflow-y-scroll flex flex-col gap-2 py-3 max-h-[100%]">
+            <Group>
               <Container2 classlist="">
                 <TextField name="name" label="Name" type="text" error={errors.name} required />
               </Container2>
               <Container2 classlist="">
                 <TextField name="username" label="@UserName" type="text" error={errors.username} required />
               </Container2>
-            </div>
+            </Group>
             <Container>
               <TextArea name="about" label="About" type="text" error={errors.about} required />
             </Container>
-            <div className="w-full flex flex-col md:flex-row gap-x-4 items-start">
+            <Group>
               <Container2 classlist="">
                 <SelectField
                   extraFunction={setCountry}
+                  getIndex={setCountryIndex}
                   name="country"
                   label="Country"
                   options={countries?.map((country) => country?.name)}
@@ -106,45 +111,45 @@ export default (props) => {
                 <SelectField
                   name="state"
                   label="State"
-                  options={states?.map((state) => state?.name)}
+                  options={states?.map((state) => state)}
                   error={errors.state}
                 />
               </Container2>
-            </div>
-            <div className="w-full flex flex-col md:flex-row gap-x-4 items-start">
+            </Group>
+            <Group>
               <Container2 classlist="">
                 <TextField name="address" label="Address" type="text" error={errors.address} required />
               </Container2>
               <Container2 classlist="">
                 <TextField name="phoneNumber" label="Phone Number" type="text" error={errors.phoneNumber} required />
               </Container2>
-            </div>
+            </Group>
             <Container>
               <TextField name="email" label="Email" type="text" error={errors.email} required />
             </Container>
-            <div className="w-full flex flex-col md:flex-row gap-x-4 items-start">
+            <Group>
               <Container2 classlist="">
                 <TextField name="whatsapp" label="WhatsApp Number" type="text" error={errors.whatsapp} />
               </Container2>
               <Container2 classlist="">
                 <TextField name="facebook" label="Facebook" type="text" error={errors.facebook} />
               </Container2>
-            </div>
-            <div className="w-full flex flex-col md:flex-row gap-x-4 items-start">
+            </Group>
+            <Group>
               <Container2 classlist="">
                 <TextField name="instagram" label="Instagram" type="text" error={errors.instagram} />
               </Container2>
               <Container2 classlist="">
                 <TextField name="twitter" label="Twitter" type="text" error={errors.twitter} />
               </Container2>
-            </div>
-            <Container classlist="mt-5">
-              <Button id="createAgencyButton" type="submit" text="Create Agency" />
-            </Container>
-          </Form>
-        </div>
-        <Alert custom />
+            </Group>
+          </div>
+          <Container classlist="mb-6">
+            <Button id="createAgencyButton" type="submit" text="Create Agency" />
+          </Container>
+        </Form>
       </div>
+      <Alert custom />
     </div>
   );
 };

@@ -27,6 +27,7 @@
     "@mui/material": "^5.8.7",
     "apollo-link-http": "^1.5.17",
     "apollo-upload-client": "^17.0.0",
+    "country-state-picker": "^1.1.5",
     "country-to-currency": "^1.0.8",
     "dotenv": "^16.0.1",
     "graphql": "^15.8.0",
