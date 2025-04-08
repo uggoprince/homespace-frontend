@@ -24,7 +24,7 @@ export default class AgencyCard extends Component {
             {name}
           </span>
         </div>
-        <div className="agency-image" style={{ backgroundImage: `url(${banner})` }} />
+        <div className="agency-image bg-center" style={{ backgroundImage: `url(${banner})` }} />
         <div className="text-section">
           <div className="subhead">
             {about}

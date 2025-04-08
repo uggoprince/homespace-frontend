@@ -40,7 +40,7 @@ export default (props) => {
       <div
         id={id}
         ref={getAgencyDivRef()}
-        className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 justify-items-center w-full "
+        className="grid grid-cols-[repeat(auto-fit,minmax(360px,1fr))] gap-8 justify-items-center w-full "
       >
         {[...agencies].map((obj) => returnAgencyCard(obj))}
       </div>
