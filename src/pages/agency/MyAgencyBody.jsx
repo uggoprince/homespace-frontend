@@ -68,7 +68,7 @@ const Agency = (props) => {
     }
   }, [dataBanner]);
   useEffect(() => {
-    if (bannerFilePath && open === false) setBannerForUpload(null, null, null);
+    if (open === false) setBannerForUpload(null, null, null);
   }, [open]);
   useEffect(() => {
     if (loadingBanner) {
@@ -177,11 +177,11 @@ const Agency = (props) => {
         open={open}
         handleClose={handleClose}
       >
-        <div className="inline-block">
-          <div className="inline-block p-2 bg-slate-700 rounded-none">
-            <img src={bannerFilePath} alt="" />
+        <div className="w-full flex flex-col max-h-full justify-center content-center">
+          <div className="p-2 bg-slate-700 rounded-none w-[80%] overflow-y-scroll flex flex-col gap-2 py-3 max-h-[80%] self-center">
+            <img src={bannerFilePath} alt="" className="w-full h-auto" />
           </div>
-          <div className="w-full flex flex-row-reverse px-8 pb-4">
+          <div className="w-full flex flex-row-reverse px-8 pb-4 mb-10 py-3 h-fit">
             {/* <Button
               classname="bg-white text-slate-600 border border-slate-600 w-fit"
               handleclick={(e) => {}}

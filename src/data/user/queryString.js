@@ -16,7 +16,7 @@ mutation ($firstname: String!,
       password: $password,
       address: $address) {
     user {
-      id, country, state
+      id, country, state, lastname, firstname, profile { hasAgency }
     }
     token
   }

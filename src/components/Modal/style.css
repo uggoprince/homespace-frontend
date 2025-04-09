@@ -5,6 +5,7 @@
 .modal-main {
     max-width: 80%;
     max-height: 80%;
+    width: auto;
     height: auto;
     @apply rounded-lg overflow-y-hidden;
 }
