@@ -5,6 +5,7 @@ import Header, { HeaderBottomMargin } from '../../components/Header';
 import Agencies from '../../data/agency/Agencies';
 import AgenciesView from '../../data/agency/AgenciesView';
 import { GET_AGENCIES } from '../../data/agency/queryString';
+import { BaseLayout } from '../../layouts/base-layout';
 
 class AgenciesPage extends Component {
   componentDidMount() {}
@@ -12,13 +13,13 @@ class AgenciesPage extends Component {
   render() {
     const { w } = this.props;
     return (
-      <div className="w-full min-ht-vh flex flex-col relative">
+      <BaseLayout css="min-h-svh">
         <Header />
         <AgenciesView>
           {/* <HeaderBottomMargin /> */}
           <Agencies query={GET_AGENCIES} queryName="getAgencies" />
         </AgenciesView>
-      </div>
+      </BaseLayout>
     );
   }
 }

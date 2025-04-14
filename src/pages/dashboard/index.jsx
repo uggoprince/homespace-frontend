@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import Header from '../../components/Header';
 import Menu from './menu';
+import { BaseLayout } from '../../layouts/base-layout';
 
 class DashboardPage extends Component {
   componentDidMount() {}
 
   render() {
     return (
-      <div className="w-full min-ht-vh overflow-y-hidden">
+      <BaseLayout css="min-h-svh">
         <Header />
         <div className="w-full page-content">
           <div className="flex flex-row justify-between fixed w-full">
@@ -30,7 +31,7 @@ class DashboardPage extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </BaseLayout>
     );
   }
 }

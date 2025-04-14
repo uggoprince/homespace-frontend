@@ -7,6 +7,7 @@ import HomeBody from './body';
 import Properties from '../../data/property/PropertiesAndDetailsBox';
 import '../style.css';
 import Search from '../search';
+import { BaseLayout } from '../../layouts/base-layout';
 
 const Home = (props) => {
   const {
@@ -31,13 +32,13 @@ class HomePage extends Component {
     const qEmpty = q === undefined;
     return (
       <Home qEmpty={qEmpty} start={propsSearchOffset} q={q}>
-        <div className="w-full min-ht-vh relative">
+        <BaseLayout css="min-h-svh">
           <Header search={q} offset={propsSearchOffset} />
           <Properties property={property} number={2}>
             {/* <HeaderBottomMargin /> */}
             <HomeBody qEmpty={qEmpty} />
           </Properties>
-        </div>
+        </BaseLayout>
       </Home>
     );
   }

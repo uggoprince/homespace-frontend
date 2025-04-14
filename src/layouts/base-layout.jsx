@@ -1,7 +1,10 @@
 import React from 'react';
 
-export const BaseLayout = ({ children }) => (
-  <div className="w-full relative h-dvh master">
-    {children}
-  </div>
-);
+export const BaseLayout = (props) => {
+  const { children, css = 'h-dvh master' } = props;
+  return (
+    <div className={`w-full relative flex flex-col ${css}`}>
+      {children}
+    </div>
+  );
+};

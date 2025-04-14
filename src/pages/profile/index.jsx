@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../components/Header';
 import { ProfileBody } from './body';
+import { BaseLayout } from '../../layouts/base-layout';
 
 class Profile extends Component {
   componentDidMount() {}
 
   render() {
     return (
-      <div className="w-full min-ht-vh relative">
+      <BaseLayout css="min-h-svh">
         <Header />
         <ProfileBody />
-      </div>
+      </BaseLayout>
     );
   }
 }

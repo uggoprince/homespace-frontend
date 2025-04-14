@@ -1,4 +1,5 @@
-import { indigo, red } from 'tailwindcss/colors';
+import { indigo } from 'tailwindcss/colors';
+
 import {
   createTheme,
 } from '@mui/material';
