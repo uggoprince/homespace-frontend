@@ -88,89 +88,93 @@ const Agency = (props) => {
       {error && <ErrorHandler error={error} />}
       {agency && !error && !loading && (
       <div className="agency-body page-content">
-        <div className="username-box relative">
-          <div className="self-center w-[100%] box-border mx-auto text-xl text-indigo-500">
-            @
-            {agency.username}
-          </div>
-        </div>
-        <div className="banner-and-contact-container">
-          {/** Banner Image */}
-          <div className="banner-and-contact-box">
-            <div className="banner-box xl:basis-4/6">
-              <div
-                title="Change banner"
-                className="edit-banner"
-                onClick={(e) => { document.getElementById('uploadBannerInput').click(); }}
-              >
-                <FaPencilAlt
-                  className="text-indigo-600 hover:text-indigo-700"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple={false}
-                  className="hidden"
-                  id="uploadBannerInput"
-                  name="uploadBannerInput"
-                  onChange={handleBannerPick}
-                />
-              </div>
-              <img
-                src={agency?.banner}
-                alt=""
-                className="banner-image"
-              />
-            </div>
-            <div
-              className="agency-contacts-socials text-textColor font-roboto"
-            >
-              <div className="agency-contacts">
-                <div className="agency-contact">
-                  <FaPhoneAlt className=" text-iconColor social-icon" />
-                  <span className="pl-1">{agency.phoneNumber}</span>
-                </div>
-                <div className="agency-contact">
-                  <FaEnvelope className="text-amber-500 social-icon" />
-                  <span className="pl-1">{agency.email}</span>
-                </div>
-                <div className="agency-contact pb-4">
-                  <FaGlobe className=" text-iconColor social-icon" />
-                  <span className="pl-1">{`${agency?.address}, ${agency?.state}, ${agency?.country}`}</span>
-                </div>
-              </div>
-              <div className="agency-socials">
-                {agency?.whatsapp && (
-                <a href={`https://wa.me/${agency.whatsapp}`} target="blank" className="agency-contact">
-                  <FaWhatsapp className="text-green-600 social-icon" />
-                  <span className="">{agency.whatsapp}</span>
-                </a>
-                )}
-                {agency?.facebook && (
-                <div className="agency-contact">
-                  <FaFacebook className="text-tertiary social-icon" />
-                  <span className="">{agency.facebook}</span>
-                </div>
-                )}
-                {agency?.instagram && (
-                <div className="agency-contact">
-                  <FaInstagram className="text-orange-600 social-icon" />
-                  <span className="pl-1">{agency.instagram}</span>
-                </div>
-                )}
-                {agency?.twitter && (
-                <div className="agency-contact">
-                  <FaTwitter className="text-tertiary social-icon" />
-                  <span className="pl-1">{agency.twitter}</span>
-                </div>
-                )}
-              </div>
+        <div className="agency-body-content">
+          <div className="username-box sticky">
+            <div className="self-center w-[100%] box-border mx-auto text-xl text-indigo-500">
+              @
+              {agency.username}
             </div>
           </div>
-        </div>
-        <div className="py-3 w-full">
-          <h1 className="font-semibold text-2xl">{agency?.name}</h1>
-          <div className="w-full h-auto">{agency?.about}</div>
+          <div className="w-full h-auto">
+            <div className="banner-and-contact-container">
+              {/** Banner Image */}
+              <div className="banner-and-contact-box">
+                <div className="banner-box xl:basis-4/6">
+                  <div
+                    title="Change banner"
+                    className="edit-banner"
+                    onClick={(e) => { document.getElementById('uploadBannerInput').click(); }}
+                  >
+                    <FaPencilAlt
+                      className="text-indigo-600 hover:text-indigo-700"
+                    />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple={false}
+                      className="hidden"
+                      id="uploadBannerInput"
+                      name="uploadBannerInput"
+                      onChange={handleBannerPick}
+                    />
+                  </div>
+                  <img
+                    src={agency?.banner}
+                    alt=""
+                    className="banner-image"
+                  />
+                </div>
+                <div
+                  className="agency-contacts-socials text-textColor font-roboto"
+                >
+                  <div className="agency-contacts">
+                    <div className="agency-contact">
+                      <FaPhoneAlt className=" text-iconColor social-icon" />
+                      <span className="pl-1">{agency.phoneNumber}</span>
+                    </div>
+                    <div className="agency-contact">
+                      <FaEnvelope className="text-amber-500 social-icon" />
+                      <span className="pl-1">{agency.email}</span>
+                    </div>
+                    <div className="agency-contact pb-4">
+                      <FaGlobe className=" text-iconColor social-icon" />
+                      <span className="pl-1">{`${agency?.address}, ${agency?.state}, ${agency?.country}`}</span>
+                    </div>
+                  </div>
+                  <div className="agency-socials">
+                    {agency?.whatsapp && (
+                      <a href={`https://wa.me/${agency.whatsapp}`} target="blank" className="agency-contact">
+                        <FaWhatsapp className="text-green-600 social-icon" />
+                        <span className="">{agency.whatsapp}</span>
+                      </a>
+                    )}
+                    {agency?.facebook && (
+                      <div className="agency-contact">
+                        <FaFacebook className="text-tertiary social-icon" />
+                        <span className="">{agency.facebook}</span>
+                      </div>
+                    )}
+                    {agency?.instagram && (
+                      <div className="agency-contact">
+                        <FaInstagram className="text-orange-600 social-icon" />
+                        <span className="pl-1">{agency.instagram}</span>
+                      </div>
+                    )}
+                    {agency?.twitter && (
+                      <div className="agency-contact">
+                        <FaTwitter className="text-tertiary social-icon" />
+                        <span className="pl-1">{agency.twitter}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="py-3 w-full">
+              <h1 className="font-semibold text-2xl">{agency?.name}</h1>
+              <div className="w-full h-auto">{agency?.about}</div>
+            </div>
+          </div>
         </div>
       </div>
       )}

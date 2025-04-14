@@ -1,5 +1,8 @@
 .agency-body {
-    @apply flex flex-col w-[85%] max-w-[90rem] mx-auto h-fit;
+    @apply w-full mx-auto overflow-y-clip pb-20;
+}
+.agency-body-content {
+    @apply w-[85%] max-w-[90rem] flex flex-col mx-auto;
 }
 .username-box {
     @apply w-full py-3 flex flex-row;

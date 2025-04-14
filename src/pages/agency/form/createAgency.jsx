@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { getCountries, getStates } from 'country-state-picker';
 import Form from '../../../components/Form';
 import TextField, { SelectField, TextArea } from '../../../components/Input/textField';
 import useForm from '../../../components/Form/useForm';
@@ -18,7 +19,6 @@ import Alert, { notify } from '../../../components/Alert';
 import { useAuth } from '../../../auth/AuthProvider';
 import { updateLocalStorage } from '../../../Utils/LocalStorage';
 import { Group } from '../../../components/Form/group';
-import { getCountries, getStates } from 'country-state-picker';
 
 export default (props) => {
   const {
