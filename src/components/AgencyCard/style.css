@@ -24,6 +24,7 @@
     height: 200px;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     @apply bg-slate-300;
 }
 .text-section {

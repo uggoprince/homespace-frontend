@@ -18,7 +18,7 @@
     lg:h-[450px];
 }
 .banner-image {
-    @apply w-full rounded-lg box-border h-[100%] bg-slate-500;
+    @apply w-full rounded-lg box-border h-[100%] bg-slate-500 object-cover object-center;
 }
 .edit-banner {
     @apply absolute right-0 bg-white mr-8 mt-8 text-2xl border-4 border-slate-300
