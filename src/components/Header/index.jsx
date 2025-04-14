@@ -65,7 +65,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className="header">
+      <header className="header fixed-header">
         <div className="header-nav">
           <Logo />
           <Navigation />

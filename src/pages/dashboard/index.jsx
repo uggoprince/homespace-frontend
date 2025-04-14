@@ -12,7 +12,7 @@ class DashboardPage extends Component {
     return (
       <div className="w-full min-ht-vh overflow-y-hidden">
         <Header />
-        <div className="w-full">
+        <div className="w-full page-content">
           <div className="flex flex-row justify-between fixed w-full">
             <div className={`h-screen box-border
               w-auto border

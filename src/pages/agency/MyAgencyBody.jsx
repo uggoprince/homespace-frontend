@@ -29,6 +29,7 @@ const Agency = (props) => {
     bannerFilePath: null,
     bannerFileError: null,
   });
+  const [agency, setAgency] = useState(null);
   const [bannerUpdating, setBannerUpdating] = useState(false);
   const navigate = useNavigate();
   const {
@@ -39,9 +40,7 @@ const Agency = (props) => {
     { loading: loadingBanner, error: errorBanner, data: dataBanner },
   ] = mutateApi(UPDATE_BANNER);
   const { loading, error, data } = queryApi(GET_USER_AGENCY, {}, false);
-  const {
-    agency, bannerFile, bannerFilePath,
-  } = state;
+  const { bannerFile, bannerFilePath } = state;
   let alertLoadingId;
   const setBannerForUpload = (file, path, error) => {
     setState({
@@ -56,7 +55,10 @@ const Agency = (props) => {
     updateAgencyBanner({ variables: { id: agency?.id, files: bannerFile } });
   };
   useEffect(() => {
-    if (data && data?.getUserAgency) setState({ ...state, agency: data?.getUserAgency });
+    if (data && data?.getUserAgency) {
+      setState({ ...state, agency: data?.getUserAgency });
+      setAgency(data?.getUserAgency);
+    }
   }, [data]);
   useEffect(() => {
     if (dataBanner && dataBanner?.updateAgencyBanner !== null && !loadingBanner && bannerUpdating) {
@@ -85,7 +87,7 @@ const Agency = (props) => {
       {loading && 'Loading...'}
       {error && <ErrorHandler error={error} />}
       {agency && !error && !loading && (
-      <div className="agency-body">
+      <div className="agency-body page-content">
         <div className="username-box relative">
           <div className="self-center w-[100%] box-border mx-auto text-xl text-indigo-500">
             @

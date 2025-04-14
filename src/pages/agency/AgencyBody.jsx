@@ -20,7 +20,7 @@ const Agency = (props) => {
     if (data && data?.getAgencyByUsername) setState({ ...state, agency: data?.getAgencyByUsername });
   }, [data]);
   return (
-    <div className="w-full">
+    <div className="w-full page-content">
       {loading && 'Loading...'}
       {error && <ErrorHandler error={error} />}
       {agency && !error && !loading && (

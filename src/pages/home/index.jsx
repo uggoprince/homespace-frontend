@@ -34,7 +34,7 @@ class HomePage extends Component {
         <div className="w-full min-ht-vh relative">
           <Header search={q} offset={propsSearchOffset} />
           <Properties property={property} number={2}>
-            <HeaderBottomMargin />
+            {/* <HeaderBottomMargin /> */}
             <HomeBody qEmpty={qEmpty} />
           </Properties>
         </div>

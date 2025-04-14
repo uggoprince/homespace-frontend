@@ -16,6 +16,22 @@ import './index.css';
 import { store } from './Utils/Store';
 import theme from './theme';
 import { getLocalStorage } from './Utils/LocalStorage';
+import LayoutFixer from './layouts/LayoutFixer';
+
+// function adjustContentPadding() {
+//   const header = document.getElementById('fixed-header');
+//   const content = document.getElementById('page-content');
+
+//   const headerHeight = header.offsetHeight;
+//   content.style.paddingTop = `${headerHeight}px`;
+// }
+
+// // Run on load
+// window.addEventListener('load', adjustContentPadding);
+// // Run on resize
+// window.addEventListener('resize', adjustContentPadding);
+// // Optional: run if header height might change from content changes
+// new ResizeObserver(adjustContentPadding).observe(document.getElementById('fixed-header'));
 
 const API_URL = import.meta.env.VITE_API_URL;
 const httpLink = createUploadLink({
@@ -48,6 +64,7 @@ root.render(
     <ApolloProvider client={client}>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
+          <LayoutFixer />
           <App />
         </ThemeProvider>
       </Provider>

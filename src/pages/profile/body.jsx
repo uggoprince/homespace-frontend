@@ -11,7 +11,7 @@ export const ProfileBody = (props) => {
   const { user } = useAuth();
   const { profile: { hasAgency } } = user;
   return (
-    <div className="container hs-max-width-85">
+    <div className="container hs-max-width-85 page-content">
       <div className="w-full">
         <div className="flex flex-col box-border px-2 sticky top-0 w-full">
           <div className="w-full pt-2 pb-1 px-3 font-semibold text-2xl text-slate-600">
