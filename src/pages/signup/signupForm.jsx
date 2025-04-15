@@ -1,6 +1,5 @@
 // import 'regenerator-runtime/runtime';
 import { useEffect } from 'react';
-import '../../components/Form/style.css';
 import toast from 'react-hot-toast';
 import TextField, { PasswordTextField } from '../../components/Input/textField';
 import Container, { container as Container2 } from '../../components/Input/inputContainer';
@@ -42,8 +41,7 @@ const SignupForm = () => {
   return (
     <div className="flex-1 flex-shrink w-full h-full overflow-y-scroll page-content">
       <div className="container flex flex-col justify-around h-full">
-        {/* <div className="w-full bg-red-900"> */}
-        <Form submithandler={auth} method="POST" id="signupForm" formclass="signupForm shadow-2xl max-h-[80%] flex flex-col gap-3">
+        <Form submithandler={auth} method="POST" id="signupForm" formclass="signupForm max-h-[80%]">
           <div className="w-full">
             <span>Create Account</span>
           </div>
@@ -80,10 +78,9 @@ const SignupForm = () => {
             </Group>
           </div>
           <Container>
-            <Button id="signupButton" type="submit" text="Sign Up" />
+            <Button id="signupButton" type="submit" text="Sign Up" disable={loading} />
           </Container>
         </Form>
-        {/* </div> */}
       </div>
       <Alert />
     </div>

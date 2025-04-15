@@ -125,7 +125,7 @@ const Agency = (props) => {
                   />
                 </div>
                 <div
-                  className="agency-contacts-socials text-textColor font-roboto"
+                  className="agency-contacts-socials text-textColor dark:text-slate-300 font-roboto"
                 >
                   <div className="agency-contacts">
                     <div className="agency-contact">
@@ -170,7 +170,7 @@ const Agency = (props) => {
                 </div>
               </div>
             </div>
-            <div className="py-3 w-full">
+            <div className="py-3 w-full dark:text-white">
               <h1 className="font-semibold text-2xl">{agency?.name}</h1>
               <div className="w-full h-auto">{agency?.about}</div>
             </div>

@@ -21,7 +21,7 @@ export default (props) => {
 
   return (
     <div className="w-full min-h-full mx-auto ">
-      <div className="w-auto mb-10 text-lg">
+      <div className="w-auto mb-5 mt-5 text-lg dark:text-white">
         {itemCount}
       </div>
       <div className=" w-full

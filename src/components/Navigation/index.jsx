@@ -26,7 +26,7 @@ const HSLink = (props) => {
           setIsActive(activeText);
         }}
         className={() => `nav-link 
-          ${(isActive?.current.startsWith(activeText) ? 'bg-indigo-600 text-white' : 'text-primary')}`}
+          ${(isActive?.current.startsWith(activeText) ? 'bg-indigo-600 text-white' : 'text-primary dark:text-primary2')}`}
       >
         {text}
       </NavLink>
@@ -54,11 +54,12 @@ const NavBlock = ({ children }) => (
     <ul
       className="hidden
       absolute
-      border-indigo-600
+      border-primary
       top-12
       right-1
       border-2 rounded
       bg-white
+      dark:bg-darkMode
       md:visible
       md:bg-transparent
       md:right-0
@@ -80,7 +81,7 @@ const NavBlock = ({ children }) => (
         viewBox="0 0 24 24"
         width="24px"
         fill="#000000"
-        className="md:hidden cursor-pointer block"
+        className="md:hidden cursor-pointer block dark:fill-white"
       >
         <path d="M0 0h24v24H0V0z" fill="none" />
         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />

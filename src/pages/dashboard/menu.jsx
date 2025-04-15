@@ -27,8 +27,8 @@ const MenuButton = ({
         return `cursor-pointer
       active:bg-indigo-400
        hover:text-white
-      hover:bg-indigo-600 rounded my-2 drop-shadow
-      ${(active === activeText) ? 'text-white bg-indigo-600' : 'text-indigo-600'}`;
+      hover:bg-primary rounded my-2 drop-shadow
+      ${(active === activeText) ? 'text-white bg-indigo-600' : 'text-primary dark:text-primary2'}`;
       }}
     >
       <div className="py-2 rounded">
@@ -73,7 +73,7 @@ export default (props) => {
       <div className="pl-2 pr-2 pt-3">
         <FaAngleDoubleLeft
           title={`${open ? 'Close menu' : 'Open Menu'}`}
-          className={`${!open && 'rotate-180'} text-slate-600 duration-500 cursor-pointer -right-0 text-3xl float-right inline`}
+          className={`${!open && 'rotate-180'} text-slate-600 dark:text-slate-300 duration-500 cursor-pointer -right-0 text-3xl float-right inline`}
           onClick={() => setOpen(!open)}
         />
       </div>

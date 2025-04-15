@@ -33,4 +33,5 @@
     /*background: rgb(202, 202, 202);*/
     background-color: #eee;
     opacity: 0.92;
+    @apply dark:bg-slate-700 dark:bg-opacity-90;
 }

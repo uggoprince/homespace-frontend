@@ -5,6 +5,7 @@
     width: 360px;
     @apply
     bg-white
+    dark:bg-darkMode
     flex-1
     basis-7
     inline-block

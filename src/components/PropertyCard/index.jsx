@@ -42,7 +42,7 @@ class PropertyCard extends Component {
         </div>
         <div className="px-2 py-2">
           <div className="text-tertiary text-md capitalize">{propertyType}</div>
-          <div className="text-sm truncate">{address}</div>
+          <div className="text-sm truncate dark:text-white">{address}</div>
         </div>
       </div>
     );

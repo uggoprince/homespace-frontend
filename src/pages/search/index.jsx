@@ -7,6 +7,7 @@ import { GET_SEARCHED_PROPERTIES as queryString } from '../../data/property/quer
 import SearchProperties from '../../data/property/SearchProperties';
 import Properties from '../../data/property/PropertiesAndDetailsBox';
 import '../style.css';
+import { BaseLayout } from '../../layouts/base-layout';
 
 class Search extends Component {
   componentDidMount() {
@@ -22,13 +23,13 @@ class Search extends Component {
       return Redirect;
     }
     return (
-      <div className="w-full min-ht-vh relative">
+      <BaseLayout css="min-ht-vh">
         <Header search={q} />
         <Properties property={property} number={1}>
-          <HeaderBottomMargin />
+          {/* <HeaderBottomMargin /> */}
           <SearchProperties qString={queryString} offset={offset} limit={limit} searchType={1} />
         </Properties>
-      </div>
+      </BaseLayout>
     );
   }
 }

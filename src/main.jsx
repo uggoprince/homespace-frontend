@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ApolloClient, ApolloProvider, InMemoryCache, createHttpLink,
@@ -10,11 +10,11 @@ import { HttpLink } from 'apollo-link-http';
 import { createUploadLink } from 'apollo-upload-client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider, useMediaQuery } from '@mui/material';
 import App from './App';
 import './index.css';
 import { store } from './Utils/Store';
-import theme from './theme';
+import getTheme from './theme';
 import { getLocalStorage } from './Utils/LocalStorage';
 import LayoutFixer from './layouts/LayoutFixer';
 
@@ -57,17 +57,24 @@ const client = new ApolloClient({
   cache,
 });
 
+function Root() {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const theme = useMemo(() => getTheme(prefersDarkMode), [prefersDarkMode]);
+
+  return (
+    <Router>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <LayoutFixer />
+            <App />
+          </ThemeProvider>
+        </Provider>
+      </ApolloProvider>
+    </Router>
+  );
+}
+
 const root = createRoot(document.getElementById('root'));
 
-root.render(
-  <Router>
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <LayoutFixer />
-          <App />
-        </ThemeProvider>
-      </Provider>
-    </ApolloProvider>
-  </Router>,
-);
+root.render(<Root />);

@@ -34,12 +34,14 @@ module.exports = {
       }, */
       colors: {
         main: colors.indigo,
-        primary: '#4f46e5',
+        primary: colors.indigo[600],
+        primary2: colors.indigo[500],
         buttonColor: '#4f46e5',
         secondary: '#9f46e5',
         tertiary: '#468DE5',
         textColor: colors.slate[600],
         iconColor: colors.amber[500],
+        darkMode: '#15202B', // colors.slate[900], // ,
       },
       fontFamily: {
         roboto: ['Roboto'],

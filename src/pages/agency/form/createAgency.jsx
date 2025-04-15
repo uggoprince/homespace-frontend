@@ -1,5 +1,3 @@
-/* eslint-disable no-else-return */
-/* eslint-disable consistent-return */
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +13,6 @@ import { SignOutToLogin } from '../../../auth/signout';
 import { createTheAgency } from '../../../data/agency/fieldProcessor';
 import { CREATE_AGENCY } from '../../../data/agency/queryString';
 import Alert, { notify } from '../../../components/Alert';
-// import { PATHS } from '../../../Utils/paths';
 import { useAuth } from '../../../auth/AuthProvider';
 import { updateLocalStorage } from '../../../Utils/LocalStorage';
 import { Group } from '../../../components/Form/group';
@@ -82,7 +79,7 @@ export default (props) => {
           submithandler={createIt}
           method="POST"
           id="createAgencyForm"
-          formclass="createAgencyForm flex flex-col gap-3 max-h-full"
+          formclass="createAgencyForm max-h-full"
         >
           <div className="w-full overflow-y-scroll flex flex-col gap-2 py-3 max-h-[100%]">
             <Group>

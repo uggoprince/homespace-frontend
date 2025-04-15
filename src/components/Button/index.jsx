@@ -3,13 +3,14 @@ import './style.css';
 
 export default (props) => {
   const {
-    id, type, text, handleclick,
+    id, type, text, handleclick, disable = false,
   } = props;
   return (
     <button
       id={id}
       type={type}
       onClick={handleclick}
+      disabled={disable}
       className="default-button bg-indigo-600"
     >
       {text}

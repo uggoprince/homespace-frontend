@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import '../../components/Form/style.css';
+// import '../../components/Form/style.css';
 import toast from 'react-hot-toast';
 import TextField, { PasswordTextField } from '../../components/Input/textField';
 import InputContainer from '../../components/Input/inputContainer';
@@ -43,8 +43,7 @@ const LoginForm = () => {
   return (
     <div className="flex flex-col justify-center flex-1 flex-shrink w-full h-full overflow-y-scroll page-content">
       <div className="container flex flex-col justify-around h-full">
-        {/* <div className="flex flex-row pt-16 pb-28"> */}
-        <Form submithandler={auth} method="POST" id="loginForm" formclass="loginForm shadow-2xl flex flex-col gap-3">
+        <Form submithandler={auth} method="POST" id="loginForm" formclass="loginForm">
           <div className="w-full">
             <span>Login</span>
           </div>
@@ -68,10 +67,9 @@ const LoginForm = () => {
             </InputContainer>
           </div>
           <InputContainer>
-            <Button id="loginButton" type="submit" text="Login" />
+            <Button id="loginButton" type="submit" text="Login" disable={loading} />
           </InputContainer>
         </Form>
-        {/* </div> */}
       </div>
       <Alert />
     </div>
