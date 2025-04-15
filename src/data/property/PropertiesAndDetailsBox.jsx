@@ -12,7 +12,7 @@ const Properties = (props) => {
         <div id={`propertiesDiv${number}`} className="transition-width w-full">
           {children}
         </div>
-        <div id={`propertyDetailsFromSearchDiv${number}`} className="propertyDetailsFromSearchDiv hidden transition-width w-full">
+        <div id={`propertyDetailsFromSearchDiv${number}`} className="propertyDetailsFromSearchDiv hidden transition-width w-full dark:bg-darkMode">
           {propertyPresent && <PropertyDetails property={property} number={number} />}
         </div>
       </div>
