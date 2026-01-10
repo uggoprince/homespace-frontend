@@ -1,48 +1,39 @@
 import { useRef } from 'react';
+import PropTypes from 'prop-types';
 import AgencyCard from '../../components/AgencyCard';
 import Pager from '../../components/SearchPaginator';
 import { moveToNewAgencyPage } from '../../Utils/EventHandlers';
+import { AgencyCardSkeleton } from '../../components/AgencyCard/skeleton';
 
-let agencyDivRef;
-
-const assignAgencyDivRef = () => {
-  agencyDivRef = useRef(null);
-};
-
-export const getAgencyDivRef = () => agencyDivRef;
-
-export default (props) => {
+const AgencyAdapter = (props) => {
   const {
     loading, offset, agenciesData, mine,
   } = props;
-  const { count, agencies } = agenciesData;
-  const returnAgencyCard = (agencyObj) => <AgencyCard key={agencyObj.id} agency={agencyObj} mine={mine} />;
-  // const count = agencies.length;
-  if (count === 0) {
+  const agencyDivRef = useRef(null);
+  const skeletonKeys = useRef(Array.from({ length: 8 }, () => Math.random().toString(36).substring(2, 11)));
+  const { count = 0, agencies } = agenciesData;
+  if (count === 0 && !loading) {
     if (mine) return (<div className="mt-4">You have no agency. Create one.</div>);
     return <div className="mt-4">No agency found.</div>;
   }
-  let pageIndex = 0;
-  if (!loading && agencies) {
-    pageIndex = (offset / 10) + 1;
-  }
-  const isPage1 = pageIndex === 1;
-  let itemCount = <div>{`Page ${pageIndex} of ${count} results`}</div>;
-  if (isPage1) itemCount = <div>{`About ${count} results`}</div>;
   let id = '';
   if (mine) {
     id = 'myAgenciesDiv';
   }
-  assignAgencyDivRef();
   return (
-    <div className="w-full mb-40">
+    <div className="pb-40 container">
       <div className="w-auto mb-10 text-lg" />
       <div
         id={id}
-        ref={getAgencyDivRef()}
-        className="grid grid-cols-[repeat(auto-fit,minmax(360px,1fr))] gap-8 justify-items-center w-full "
+        ref={agencyDivRef}
+        className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-8 justify-items-center w-full "
       >
-        {[...agencies].map((obj) => returnAgencyCard(obj))}
+        {loading && (
+          skeletonKeys.current.map((key) => (
+            <AgencyCardSkeleton key={key} />
+          ))
+        )}
+        {!loading && agencies && [...agencies].map((obj) => <AgencyCard key={obj.id} agency={obj} mine={mine} />)}
       </div>
       <div className="mt-16 w-full">
         <Pager counted={count} offset={offset} pageChanger={moveToNewAgencyPage} />
@@ -50,3 +41,21 @@ export default (props) => {
     </div>
   );
 };
+
+AgencyAdapter.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  offset: PropTypes.number.isRequired,
+  agenciesData: PropTypes.shape({
+    count: PropTypes.number,
+    agencies: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    })),
+  }).isRequired,
+  mine: PropTypes.bool,
+};
+
+AgencyAdapter.defaultProps = {
+  mine: false,
+};
+
+export default AgencyAdapter;

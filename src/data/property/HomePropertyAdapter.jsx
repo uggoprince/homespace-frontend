@@ -1,16 +1,19 @@
+import { useRef } from 'react';
+import PropTypes from 'prop-types';
 import PropertyCard from '../../components/PropertyCard';
 import Pager from '../../components/SearchPaginator';
 import { moveToNewPropertyPage } from '../../Utils/EventHandlers';
+import { PropertyCardSkeleton } from '../../components/PropertyCard/skeleton';
 
-export default (props) => {
+const HomePropertyAdapter = (props) => {
   const {
     number, loading, data, offset,
   } = props;
-  const { properties, count } = data;
+  const skeletonKeys = useRef(Array.from({ length: 9 }, () => Math.random().toString(36).substring(2, 11)));
+  const { properties, count = 0 } = data;
   const returnPropCard = (propObj) => (
     <PropertyCard key={propObj.id} property={propObj} number={number} />
   );
-  const propertiesInDom = properties.map((propObj) => returnPropCard(propObj));
   let pageIndex = 0;
   if (!loading && data) {
     pageIndex = (offset / 10) + 1;
@@ -20,18 +23,41 @@ export default (props) => {
   if (isPage1) itemCount = <div>{`About ${count} results`}</div>;
 
   return (
-    <div className="w-full min-h-full mx-auto ">
-      <div className="w-auto mb-5 mt-5 text-lg dark:text-white">
+    <div className="w-full container min-h-full space-y-6">
+      <div className="w-auto mt-6 text-lg dark:text-white">
         {itemCount}
       </div>
       <div className=" w-full
-        grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 justify-items-center"
+          grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 justify-items-center"
       >
-        {propertiesInDom}
+        {loading && (
+          skeletonKeys.current.map((key) => (
+            <PropertyCardSkeleton key={key} />
+          ))
+        )}
+        {!loading && properties?.map((propObj) => returnPropCard(propObj))}
       </div>
-      <div className="mt-16 w-full">
+      <div className=" w-full">
         <Pager counted={count} offset={offset} pageChanger={moveToNewPropertyPage} />
       </div>
     </div>
   );
 };
+
+HomePropertyAdapter.propTypes = {
+  number: PropTypes.number,
+  loading: PropTypes.bool.isRequired,
+  data: PropTypes.shape({
+    properties: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    })),
+    count: PropTypes.number,
+  }).isRequired,
+  offset: PropTypes.number.isRequired,
+};
+
+HomePropertyAdapter.defaultProps = {
+  number: null,
+};
+
+export default HomePropertyAdapter;

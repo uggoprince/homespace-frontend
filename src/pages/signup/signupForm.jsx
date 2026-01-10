@@ -45,7 +45,7 @@ const SignupForm = () => {
           <div className="w-full">
             <span>Create Account</span>
           </div>
-          <div className="w-full overflow-y-scroll flex flex-col gap-2 py-3">
+          <div className="w-full overflow-y-auto flex flex-col gap-2 py-3">
             <Group>
               <Container2>
                 <TextField name="firstname" label="First Name" error={errors.firstname} required />

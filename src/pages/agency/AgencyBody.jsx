@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-  FaArrowLeft, FaEnvelope, FaGlobeAfrica, FaPhoneAlt, FaFacebook, FaWhatsapp, FaTwitter, FaInstagram, FaGlobe,
+  FaArrowLeft, FaEnvelope, FaPhoneAlt, FaFacebook, FaWhatsapp, FaTwitter, FaInstagram, FaGlobe,
 } from 'react-icons/fa';
 import { queryApi } from '../../Utils/Api';
 import { GET_AGENCY } from '../../data/agency/queryString';
@@ -17,7 +17,7 @@ const Agency = (props) => {
   const { loading, error, data } = queryApi(GET_AGENCY, { username }, false);
   const { agency } = state;
   useEffect(() => {
-    if (data && data?.getAgencyByUsername) setState({ ...state, agency: data?.getAgencyByUsername });
+    if (data?.getAgencyByUsername) setState({ ...state, agency: data?.getAgencyByUsername });
   }, [data]);
   return (
     <div className="w-full page-content">

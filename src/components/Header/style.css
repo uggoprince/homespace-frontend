@@ -10,8 +10,8 @@
     rounded-tl-xl rounded-bl-xl w-11/12 min-w-min;
 }
 .header {
-    @apply w-full max-w-[100%] h-auto inline-block z-10 fixed top-0 left-0 right-0 bg-white border dark:bg-darkMode border-b border-gray-300 dark:border-gray-600;
+    @apply w-full h-auto inline-block z-10 fixed top-0 left-0 right-0 bg-white dark:bg-darkMode border-b border-b-gray-300 dark:border-b-gray-600;
 }
 .header-nav {
-    @apply w-full py-4 flex flex-auto justify-between px-2 box-border mx-auto;
+    @apply container py-4 flex flex-auto justify-between px-0 box-border mx-auto;
 }

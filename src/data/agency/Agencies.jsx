@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { NetworkStatus } from '@apollo/client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../auth/AuthProvider';
 import AgencyAdapter from './AgencyAdapter';
 import { queryApi } from '../../Utils/Api';
@@ -10,6 +10,7 @@ const Agencies = (props) => {
   const {
     w, agencySearchOffset, agencySearchLimit, query, queryName, mine, // setDoneRefetching, reFetchMyAgencies,
   } = props;
+  const [agenciesData, setAgenciesData] = useState({});
   const { user } = useAuth();
   let payLoad = { offset: agencySearchOffset, limit: agencySearchLimit };
   if (w) {
@@ -20,6 +21,11 @@ const Agencies = (props) => {
   const {
     loading, error, data, refetch, networkStatus,
   } = queryApi(query, payLoad, false);
+  useEffect(() => {
+    if (data) {
+      setAgenciesData(data[queryName]);
+    }
+  }, [data]);
   /* useEffect(() => {
     if (reFetchMyAgencies) {
       refetch().then((res) => {
@@ -30,19 +36,19 @@ const Agencies = (props) => {
     }
   }, [reFetchMyAgencies]); */
   return (
-    <>
-      {loading && 'Loading...'}
-      {error && <ErrorHandler error={error} />}
+    <div className="w-full min-h-full mx-auto">
+      {/* {loading && 'Loading...'} */}
+      {!loading && error && <ErrorHandler error={error} />}
       {(networkStatus === NetworkStatus.refetch) && 'Refetching!'}
-      {data && (
+      {!error && (
       <AgencyAdapter
         loading={loading}
-        agenciesData={data[queryName]}
+        agenciesData={agenciesData}
         offset={agencySearchOffset}
         mine={mine}
       />
       )}
-    </>
+    </div>
   );
 };
 

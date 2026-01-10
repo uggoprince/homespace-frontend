@@ -1,0 +1,20 @@
+.transparent-spinner {
+    background-color: transparent !important;
+}
+
+/* Enhanced specificity for transparency */
+.transparent-spinner.ant-spin,
+.transparent-spinner.ant-spin-nested-loading,
+.transparent-spinner .ant-spin-container,
+.transparent-spinner .ant-spin-dot,
+.transparent-spinner .ant-spin-text {
+    background-color: transparent !important;
+}
+
+/* For the overlay that appears when spinning */
+.transparent-spinner .ant-spin-blur,
+.transparent-spinner .ant-spin-blur::after {
+    background-color: transparent !important;
+    opacity: 1;
+}
+  

@@ -47,7 +47,7 @@ const LoginForm = () => {
           <div className="w-full">
             <span>Login</span>
           </div>
-          <div className="w-full overflow-y-scroll flex flex-col gap-2 py-3">
+          <div className="w-full overflow-y-auto flex flex-col gap-2 py-3">
             <InputContainer>
               <TextField
                 name="email"

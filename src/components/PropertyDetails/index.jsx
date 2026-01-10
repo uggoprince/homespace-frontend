@@ -17,9 +17,9 @@ export default (props) => {
   let {
     title, area, bedRooms, bathRooms,
   } = property;
-  area = (!isEmptyString(area)) ? `${area}sqm` : 'N/A';
-  bedRooms = (!isEmptyString(bedRooms) ? bedRooms : 'N/A');
-  bathRooms = (!isEmptyString(bathRooms) ? bathRooms : 'N/A');
+  area = (!isEmptyString(area)) ? `${area}sqm` : '-';
+  bedRooms = (!isEmptyString(bedRooms) ? bedRooms : '-');
+  bathRooms = (!isEmptyString(bathRooms) ? bathRooms : '-');
   title = capitalizeFirstLetter(title);
   // eslint-disable-next-line no-console
   // console.log(!isEmptyString(area));
@@ -59,14 +59,16 @@ export default (props) => {
   };
   return (
     <div id="propertyDiv" className="propertyDetails">
-      <div className="pb-2 pt-5 flex flex-row sticky top-0 bg-white dark:bg-darkMode">
+      <div className="pb-2 pt-5 flex items-center sticky top-0 bg-white dark:bg-darkMode">
         <div className="flex-1 ">
           <FaTimes
             onClick={(e) => { closeCardDetails(e, number); }}
             className="cursor-pointer inline-block bg-gray-500 text-white rounded-full text-3xl p-2 hover:bg-gray-700"
           />
         </div>
-        <div className="inline-block flex-1 text-center dark:text-white"><span id="currentPixOnDetails" /> / {numberOfPhotos}</div>
+        <div className="inline-block flex-1 text-center dark:text-white text-sm">
+          <span id="currentPixOnDetails" /> / {numberOfPhotos}
+        </div>
         <div className="inline-block flex-1 text-right">
           <FaChevronCircleLeft
             onClick={(e) => { changePhoto(e, -1); }}
@@ -78,19 +80,21 @@ export default (props) => {
           />
         </div>
       </div>
-      <div id="propertyDetailsFromSearchDivContent" className=" overflow-y-scroll h-full w-full">
+      <div id="propertyDetailsFromSearchDivContent" className=" overflow-y-auto h-full w-full">
         <div className="w-full inline-block min-h-[600px] pb-52">
           <div className="w-12/12 content-center">
             <img id="detailsDivImg" src={photo1} alt={property.title} className=" m-auto object-center h-72" />
           </div>
-          <div className="dark:text-white">
+          <div className="dark:text-white text-sm space-y-1">
             <Link
               to={`/agencies/${agency.username}`}
-              className=" text-indigo-600 dark:text-primary2 mt-6 cursor-pointer"
-            ><FaUsers className="inline text-sm" /> {agency.name}
+              className=" text-indigo-600 dark:text-primary2 mt-4 cursor-pointer flex items-center gap-1 line-clamp-1"
+            >
+              <FaUsers className="inline text-sm" size={16} />
+              <span className="">{agency.name}</span>
             </Link>
-            <div className=" text-gray-700 text-lg mb-2 mt-3 dark:text-slate-300">{title}</div>
-            <div className="mb-2">
+            <div className=" text-gray-700 text-lg dark:text-slate-300">{title}</div>
+            <div className="">
               <FaMapMarkerAlt className=" text-red-400 inline" />
               <span className="align-text-bottom"> {address}, {state}, {country}</span>
             </div>

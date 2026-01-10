@@ -5,7 +5,7 @@ import './style.css';
 
 const Footer = () => (
   <footer className="bg-indigo-800 dark:bg-darkMode w-full py-4 box-border sticky">
-    <div className="container my-auto max-w-[85%]">
+    <div className="container my-auto">
       <div className="flex justify-between flex-wrap">
         <div className="footer-social-links text-white flex text-2xl">
           <a className="cursor-pointer"><FaFacebook /></a>

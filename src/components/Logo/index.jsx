@@ -7,7 +7,7 @@ const Logo = () => {
       <div
         className="
       text-primary dark:text-primary2 py-2
-      font-black
+      font-bold
       inline-block
       cursor-pointer
       min-h-full"

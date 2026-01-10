@@ -154,26 +154,28 @@ const Navigation = () => {
   const location = useLocation();
   const path = location.pathname.toLowerCase();
   const { token, logout, user } = useAuth();
-  const dashboardNav = String(path).startsWith('/dashboard');
-  const agencyNav = String(path).startsWith('/agencies');
-  let Nav = '';
-  if (path === '/signup') {
-    Nav = <SignupNavigation />;
-  } else if (path === '/login') {
-    Nav = <LoginNavigation />;
-  } else if (path === '/') {
-    if (token) Nav = <HomeNavigation user={user} logout={logout} />;
-    else Nav = <LandingNavigation />;
-  } else if (path === '/agencies') {
-    Nav = <HomeNavigation user={user} logout={logout} />;
-  } else if (path === '/profile') {
-    Nav = <HomeNavigation user={user} logout={logout} />;
-  } else if (dashboardNav) {
-    Nav = <HomeNavigation user={user} logout={logout} />;
-  } else if (agencyNav) {
-    Nav = <HomeNavigation user={user} logout={logout} />;
-  }
-  return Nav;
+  // const dashboardNav = String(path).startsWith('/dashboard');
+  // const agencyNav = String(path).startsWith('/agencies');
+  // let Nav = '';
+  // if (path === '/signup') {
+  //   Nav = <HomeNavigation />;
+  // } else if (path === '/login') {
+  //   Nav = <HomeNavigation />;
+  // } else if (path === '/') {
+  //   if (token) Nav = <HomeNavigation user={user} logout={logout} />;
+  //   else Nav = <LandingNavigation />;
+  // } else if (path === '/agencies') {
+  //   Nav = <HomeNavigation user={user} logout={logout} />;
+  // } else if (path === '/profile') {
+  //   Nav = <HomeNavigation user={user} logout={logout} />;
+  // } else if (dashboardNav) {
+  //   Nav = <HomeNavigation user={user} logout={logout} />;
+  // } else if (agencyNav) {
+  //   Nav = <HomeNavigation user={user} logout={logout} />;
+  // }
+  // return Nav;
+  if (token) return <HomeNavigation user={user} logout={logout} />;
+  return <LandingNavigation />;
 };
 
 export default Navigation;

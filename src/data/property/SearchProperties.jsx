@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import HomePropertyAdapter from './HomePropertyAdapter';
 import { queryApi } from '../../Utils/Api';
@@ -9,21 +10,31 @@ const SearchProperties = (props) => {
     qString, q, offset, limit, searchType,
   } = props;
   const { loading, error, data } = queryApi(qString, { search: q, offset, limit });
-
-  if (loading) return 'Loading...';
+  const [properties, setProperties] = useState({});
+  useEffect(() => {
+    if (data) {
+      setProperties(data?.getProperties);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (loading) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'auto', // 'smooth', // or 'auto'
+      });
+    }
+  }, [loading]);
   if (error) {
     return `Error! ${error.message}`;
   }
   return (
     <div className="searchProperties">
-      {data && data?.getProperties && (
       <HomePropertyAdapter
         number={searchType}
         loading={loading}
-        data={data?.getProperties}
+        data={properties}
         offset={offset}
       />
-      )}
     </div>
   );
 };
