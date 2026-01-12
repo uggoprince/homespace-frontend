@@ -28,7 +28,7 @@ const MenuButton = ({
       active:bg-indigo-400
        hover:text-white
       hover:bg-primary rounded my-2 drop-shadow
-      ${(active === activeText) ? 'text-white bg-indigo-600' : 'text-primary dark:text-primary2'}`;
+      ${(active === activeText) ? 'text-white bg-indigo-600' : 'text-primary dark:text-slate-50'}`;
       }}
     >
       <div className="py-2 rounded">

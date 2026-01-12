@@ -7,8 +7,9 @@
 .nav-button {
     @apply
     cursor-pointer
-    text-primary
-    dark:text-primary2
+    text-red-500
+    dark:text-red-500
+    dark:hover:text-white
     font-semibold
     hover:bg-primary
     hover:text-white

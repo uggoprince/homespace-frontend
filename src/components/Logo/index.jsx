@@ -6,7 +6,7 @@ const Logo = () => {
     <a href="/">
       <div
         className="
-      text-primary dark:text-primary2 py-2
+      text-primary dark:text-slate-50 py-2
       font-bold
       inline-block
       cursor-pointer

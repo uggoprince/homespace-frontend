@@ -1,5 +1,5 @@
 .form {
-    @apply mx-auto bg-white dark:bg-darkMode dark:text-white  rounded-lg p-8
+    @apply mx-auto bg-white dark:bg-slate-950 dark:text-white  rounded-lg p-8
     shadow-2xl dark:shadow-slate-500 flex flex-col gap-3;
 }
 

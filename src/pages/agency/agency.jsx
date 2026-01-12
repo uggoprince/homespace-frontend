@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../components/Header';
 import AgencyBody from './AgencyBody';
+import { BaseLayout } from '../../layouts/base-layout';
 
 class AgencyPage extends Component {
   componentDidMount() {}
@@ -10,10 +11,10 @@ class AgencyPage extends Component {
   render() {
     const { w } = this.props;
     return (
-      <div className="w-full min-ht-vh relative">
+      <BaseLayout css="w-full min-ht-vh relative">
         <Header />
         <AgencyBody />
-      </div>
+      </BaseLayout>
     );
   }
 }

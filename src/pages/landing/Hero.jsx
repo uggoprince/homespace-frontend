@@ -2,7 +2,7 @@ const Hero = () => (
   <div className="hero page-content">
     <div className="w-full object-none object-center flex flex-col justify-center gap-12">
       <div className="hs-text-center">
-        <div className="text-6xl text-primary dark:text-primary2 font-bold font-serif">Find A Space</div>
+        <div className="text-6xl text-primary dark:text-slate-50 font-bold font-serif">Find A Space</div>
       </div>
       <div className="hs-text-center flex-grow pb-6">
         <form id="searchForm" method="POST">
@@ -15,7 +15,7 @@ const Hero = () => (
             className="
               border-transparent
               focus:outline-none
-              focus:ring-2
+              focus:ring-none
               focus:ring-indigo-600
               focus:border-transparent
               py-4 px-4

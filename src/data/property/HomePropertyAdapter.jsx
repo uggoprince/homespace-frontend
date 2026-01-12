@@ -11,9 +11,6 @@ const HomePropertyAdapter = (props) => {
   } = props;
   const skeletonKeys = useRef(Array.from({ length: 9 }, () => Math.random().toString(36).substring(2, 11)));
   const { properties, count = 0 } = data;
-  const returnPropCard = (propObj) => (
-    <PropertyCard key={propObj.id} property={propObj} number={number} />
-  );
   let pageIndex = 0;
   if (!loading && data) {
     pageIndex = (offset / 10) + 1;
@@ -35,7 +32,7 @@ const HomePropertyAdapter = (props) => {
             <PropertyCardSkeleton key={key} />
           ))
         )}
-        {!loading && properties?.map((propObj) => returnPropCard(propObj))}
+        {!loading && properties?.map((propObj) => <PropertyCard key={propObj.id} property={propObj} number={number} />)}
       </div>
       <div className=" w-full">
         <Pager counted={count} offset={offset} pageChanger={moveToNewPropertyPage} />

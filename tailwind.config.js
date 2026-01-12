@@ -8,7 +8,7 @@ module.exports = {
     './dist/**/*.{html,js,jsx}',
     // './index.html',
   ],
-  darkMode: 'media',
+  darkMode: 'class',
   theme: {
     container: {
       center: true,
@@ -46,6 +46,10 @@ module.exports = {
       fontFamily: {
         roboto: ['Roboto'],
         open_sans: ['Open Sans'],
+      },
+      backgroundImage: {
+        'gradient-light': 'linear-gradient(to bottom, rgb(248 250 252), rgb(255 255 255), rgb(248 250 252))',
+        'gradient-dark': 'linear-gradient(to bottom, rgb(2 6 23), rgb(15 23 42), rgb(2 6 23))',
       },
     },
   },

@@ -1,12 +1,14 @@
-import React from 'react';
 import Routes from './routes';
 import AuthProvider from './auth/AuthProvider';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 const App = () => (
   <div className="font-sans">
-    <AuthProvider>
-      <Routes />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </ThemeProvider>
   </div>
 );
 

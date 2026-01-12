@@ -77,9 +77,9 @@ export const displayCardDetails = (e, property, num) => {
   const propertyDetailsDiv = document.getElementById(`propertyDetailsFromSearchDiv${num}`);
   const propertiesDiv = document.getElementById(`propertiesDiv${num}`);
   propertyDetailsDiv.classList.remove('hidden');
-  propertiesDiv.style.width = '60%';
+  propertiesDiv.style.width = '65%';
   // propertiesDiv.style.maxWidth = '60%';
-  propertyDetailsDiv.style.width = '40%';
+  propertyDetailsDiv.style.width = '35%';
   // propertyDetailsDiv.style.maxWidth = '40%';
   propertyDetailsDiv.style.minWidth = '400px';
 };

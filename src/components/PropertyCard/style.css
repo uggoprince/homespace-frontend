@@ -3,7 +3,26 @@
     width: 100%;
     max-width: 280px;
     box-shadow: 0px 0px 5px #aaaaaa;
-    @apply rounded-lg cursor-pointer self-start font-roboto text-textColor;
+    @apply rounded-lg cursor-pointer 
+    self-start font-roboto dark:bg-darkMode
+    text-textColor;
+    /* Reset button styles */
+    border: none;
+    background: none;
+    padding: 0;
+    text-align: left;
+    display: block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prop-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.prop-card:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
 }
 .prop-card-skeleton {
     width: 100%;

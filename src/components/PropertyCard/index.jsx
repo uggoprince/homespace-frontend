@@ -1,10 +1,19 @@
 /* eslint-disable react/prefer-stateless-function */
 import { Component } from 'react';
-import { FaMapMarkerAlt } from 'react-icons/fa';
+import PropTypes from 'prop-types';
+import {
+  Bed, Expand, House, MapPin,
+} from 'lucide-react';
 import countryToCurrency from 'country-to-currency';
 import { displayCardDetails } from '../../Utils/EventHandlers';
 import { countryNameToCode } from '../../Utils/constants';
 import './style.css';
+
+const formatPrice = (price, country, currency) => (currency
+  ? price?.toLocaleString(
+    countryNameToCode[country], { style: 'currency', currency },
+  )
+  : price?.toLocaleString(price));
 
 class PropertyCard extends Component {
   render() {
@@ -20,10 +29,13 @@ class PropertyCard extends Component {
     }
     const theIntent = intent.charAt(0).toUpperCase() + intent.slice(1);
     return (
-      <div
+      <button
+        type="button"
         onClick={(e) => displayCardDetails(e, property, number)}
         className="prop-card"
+        aria-label={`View details for ${propertyType} at ${address}`}
       >
+        {/* Image section */}
         <div className="card-image" style={{ backgroundImage: `url(${photo1})` }}>
           <div className="price-tag">
             <div className="font-medium inline-block">
@@ -31,22 +43,75 @@ class PropertyCard extends Component {
               {' '}
               {theIntent}
             </div>
-            <div className="font-bold">
-              {currency
-                ? price?.toLocaleString(
-                  countryNameToCode[country], { style: 'currency', currency },
-                )
-                : price?.toLocaleString(price)}
-            </div>
           </div>
         </div>
-        <div className="px-2 py-2">
-          <div className="text-tertiary text-xs capitalize">{propertyType}</div>
-          <div className="text-xs truncate dark:text-white">{address}</div>
+        {/* Property details section */}
+        <div className="px-2 py-2 space-y-1">
+          <div className="text-sm font-bold text-indigo-400">
+            {formatPrice(price, country, currency || countryToCurrency[country])}
+          </div>
+          <div className="text-tertiary font-semibold text-sm capitalize">{propertyType}</div>
+          <div className="text-xs truncate flex items-center gap-1 dark:text-white pb-1">
+            <MapPin size={14} />
+            <span className="flex-1 truncate">{address}</span>
+          </div>
+          <div className="flex items-center gap-4 text-sm dark:text-slate-400 pt-1 border-t border-slate-200 dark:border-slate-700">
+            <span className="flex items-center gap-1.5">
+              <House size={14} className="" />
+              {property.beds ? (
+                <span>
+                  {property.beds}
+                  {' '}
+                  beds
+                </span>
+              ) : ' - '}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Bed size={14} className="" />
+              {property.baths ? (
+                <span>
+                  {property.baths}
+                  {' '}
+                  baths
+                </span>
+              ) : ' - '}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Expand size={14} className="" />
+              {property.sqft ? (
+                <span>
+                  {property.sqft}
+                  {' '}
+                  sqft
+                </span>
+              ) : ' - '}
+            </span>
+          </div>
         </div>
-      </div>
+      </button>
     );
   }
 }
+
+PropertyCard.propTypes = {
+  property: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    photos: PropTypes.arrayOf(
+      PropTypes.shape({
+        photo: PropTypes.string,
+      }),
+    ).isRequired,
+    intent: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    propertyType: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    currency: PropTypes.string,
+    country: PropTypes.string.isRequired,
+    beds: PropTypes.number,
+    baths: PropTypes.number,
+    sqft: PropTypes.number,
+  }).isRequired,
+  number: PropTypes.number.isRequired,
+};
 
 export default PropertyCard;

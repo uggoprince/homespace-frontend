@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HomePropertyAdapter from './HomePropertyAdapter';
 import { queryApi } from '../../Utils/Api';
@@ -37,6 +38,14 @@ const SearchProperties = (props) => {
       />
     </div>
   );
+};
+
+SearchProperties.propTypes = {
+  qString: PropTypes.string.isRequired,
+  q: PropTypes.string.isRequired,
+  offset: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
+  searchType: PropTypes.number.isRequired,
 };
 
 // eslint-disable-next-line arrow-body-style
