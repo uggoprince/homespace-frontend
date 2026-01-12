@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { MailIcon, Phone } from 'lucide-react';
 import {
-  FaArrowLeft, FaEnvelope, FaPhoneAlt, FaFacebook, FaWhatsapp, FaTwitter, FaInstagram, FaGlobe, FaStar, FaMapMarkerAlt,
+  FaArrowLeft, FaFacebook, FaWhatsapp, FaTwitter, FaInstagram, FaStar, FaMapMarkerAlt,
 } from 'react-icons/fa';
-import {
-  Mail, Phone,
-} from 'lucide-react';
 import { queryApi } from '../../Utils/Api';
 import { GET_AGENCY } from '../../data/agency/queryString';
 import ErrorHandler from '../../data/errorHandler';
@@ -162,7 +160,7 @@ const Agency = () => {
                       href={`mailto:${agency.email}`}
                       variant="secondary"
                       size="md"
-                      icon={Mail}
+                      icon={MailIcon}
                       iconPosition="left"
                       external
                       className="rounded-lg hover:scale-105 transition-all border border-slate-300
@@ -172,7 +170,7 @@ const Agency = () => {
                     </Link>
                   ) : (
                     <DisabledContactButton
-                      icon={Mail}
+                      icon={MailIcon}
                       label="Email"
                     />
                   )}

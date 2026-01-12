@@ -14,4 +14,15 @@ export default defineConfig({
     PROPERTY_DETAILS_FROM_SEARCH: `"${process.env.PROPERTY_DETAILS_FROM_SEARCH}"`,
     WEB_URL: `"${process.env.WEB_URL}"`,
   },
+  build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        // Suppress "use client" directive warnings
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+          return;
+        }
+        warn(warning);
+      },
+    },
+  },
 });

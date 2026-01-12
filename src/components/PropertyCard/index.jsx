@@ -2,7 +2,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Bed, Expand, House, MapPin,
+  Bed, Expand, Home, MapPin,
 } from 'lucide-react';
 import countryToCurrency from 'country-to-currency';
 import { displayCardDetails } from '../../Utils/EventHandlers';
@@ -57,7 +57,7 @@ class PropertyCard extends Component {
           </div>
           <div className="flex items-center gap-4 text-sm dark:text-slate-400 pt-1 border-t border-slate-200 dark:border-slate-700">
             <span className="flex items-center gap-1.5">
-              <House size={14} className="" />
+              <Home size={14} className="" />
               {property.beds ? (
                 <span>
                   {property.beds}

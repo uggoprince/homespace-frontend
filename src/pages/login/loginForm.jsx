@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-// import '../../components/Form/style.css';
 import toast from 'react-hot-toast';
 import TextField, { PasswordTextField } from '../../components/Input/textField';
 import InputContainer from '../../components/Input/inputContainer';
