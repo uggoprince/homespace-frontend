@@ -2,8 +2,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Bed, Expand, Home, MapPin,
-} from 'lucide-react';
+  HomeOutlined, HotelOutlined, LocationOnOutlined, OpenWithOutlined,
+} from '@mui/icons-material';
 import countryToCurrency from 'country-to-currency';
 import { displayCardDetails } from '../../Utils/EventHandlers';
 import { countryNameToCode } from '../../Utils/constants';
@@ -52,12 +52,12 @@ class PropertyCard extends Component {
           </div>
           <div className="text-tertiary font-semibold text-sm capitalize">{propertyType}</div>
           <div className="text-xs truncate flex items-center gap-1 dark:text-white pb-1">
-            <MapPin size={14} />
+            <LocationOnOutlined fontSize="small" />
             <span className="flex-1 truncate">{address}</span>
           </div>
           <div className="flex items-center gap-4 text-sm dark:text-slate-400 pt-1 border-t border-slate-200 dark:border-slate-700">
             <span className="flex items-center gap-1.5">
-              <Home size={14} className="" />
+              <HomeOutlined size={14} fontSize="small" className="" />
               {property.beds ? (
                 <span>
                   {property.beds}
@@ -67,7 +67,7 @@ class PropertyCard extends Component {
               ) : ' - '}
             </span>
             <span className="flex items-center gap-1.5">
-              <Bed size={14} className="" />
+              <HotelOutlined size={14} fontSize="small" className="" />
               {property.baths ? (
                 <span>
                   {property.baths}
@@ -77,7 +77,7 @@ class PropertyCard extends Component {
               ) : ' - '}
             </span>
             <span className="flex items-center gap-1.5">
-              <Expand size={14} className="" />
+              <OpenWithOutlined size={14} fontSize="small" className="" />
               {property.sqft ? (
                 <span>
                   {property.sqft}

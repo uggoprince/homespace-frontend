@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MailIcon, Phone } from 'lucide-react';
 import {
   FaArrowLeft, FaFacebook, FaWhatsapp, FaTwitter, FaInstagram, FaStar, FaMapMarkerAlt,
 } from 'react-icons/fa';
+import { LuMail, LuPhone } from 'react-icons/lu';
 import { queryApi } from '../../Utils/Api';
 import { GET_AGENCY } from '../../data/agency/queryString';
 import ErrorHandler from '../../data/errorHandler';
@@ -17,7 +17,7 @@ const DisabledContactButton = ({ icon: Icon, label }) => (
     dark:bg-slate-700 text-slate-500 dark:text-slate-400 px-5 py-2.5
     rounded-xl font-medium cursor-not-allowed opacity-50"
   >
-    <Icon className="w-5 h-5" />
+    <Icon className="w-4 h-4" />
     <span>{label}</span>
   </button>
 );
@@ -100,7 +100,11 @@ const Agency = () => {
                         rounded-full text-xs font-medium"
                       >
                         <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                         Verified
                       </span>
@@ -141,7 +145,7 @@ const Agency = () => {
                       href={`tel:${agency.phoneNumber}`}
                       variant="primary"
                       size="md"
-                      icon={Phone}
+                      icon={LuPhone}
                       iconPosition="left"
                       external
                       className="rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25
@@ -151,7 +155,7 @@ const Agency = () => {
                     </Link>
                   ) : (
                     <DisabledContactButton
-                      icon={Phone}
+                      icon={LuPhone}
                       label="Phone"
                     />
                   )}
@@ -160,17 +164,18 @@ const Agency = () => {
                       href={`mailto:${agency.email}`}
                       variant="secondary"
                       size="md"
-                      icon={MailIcon}
+                      icon={LuMail}
                       iconPosition="left"
                       external
                       className="rounded-lg hover:scale-105 transition-all border border-slate-300
                       dark:border-slate-700"
+                      iconClassName="w-4 h-4"
                     >
                       Email
                     </Link>
                   ) : (
                     <DisabledContactButton
-                      icon={MailIcon}
+                      icon={LuMail}
                       label="Email"
                     />
                   )}

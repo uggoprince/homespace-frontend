@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function LayoutFixer() {
@@ -15,7 +15,10 @@ function LayoutFixer() {
   }, []);
 
   useEffect(() => {
-    updatePadding(); // Run when route changes
+    // Defer initial padding update to avoid forcing layout before styles load
+    requestAnimationFrame(() => {
+      updatePadding();
+    });
 
     const header = document.querySelector('.fixed-header');
     if (!header) return undefined;

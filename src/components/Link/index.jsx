@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 import { cn } from '../../Utils/cn';
 
@@ -27,6 +26,7 @@ const Link = ({
   disabled = false,
   icon: Icon,
   iconPosition = 'left',
+  iconClassName,
   ...props
 }) => {
   const destination = to || href;
@@ -67,9 +67,9 @@ const Link = ({
 
   const content = (
     <>
-      {Icon && iconPosition === 'left' && <Icon className="w-4 h-4 flex-shrink-0" />}
+      {Icon && iconPosition === 'left' && <Icon className={cn('w-4 h-4 flex-shrink-0', iconClassName)} />}
       {children}
-      {Icon && iconPosition === 'right' && <Icon className="w-4 h-4 flex-shrink-0" />}
+      {Icon && iconPosition === 'right' && <Icon className={cn('w-4 h-4 flex-shrink-0', iconClassName)} />}
     </>
   );
 
@@ -100,31 +100,6 @@ const Link = ({
       {content}
     </RouterLink>
   );
-};
-
-Link.propTypes = {
-  to: PropTypes.string,
-  href: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'ghost', 'link']),
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  external: PropTypes.bool,
-  disabled: PropTypes.bool,
-  icon: PropTypes.elementType,
-  iconPosition: PropTypes.oneOf(['left', 'right']),
-};
-
-Link.defaultProps = {
-  to: undefined,
-  href: undefined,
-  className: undefined,
-  variant: 'link',
-  size: 'md',
-  external: false,
-  disabled: false,
-  icon: undefined,
-  iconPosition: 'left',
 };
 
 export default Link;
