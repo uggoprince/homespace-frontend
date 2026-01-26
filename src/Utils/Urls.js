@@ -27,7 +27,10 @@ export const computeSearchPath = (searchText, start = 0) => {
 
 export const setSearchUrl = (url) => { window.location.href = url; };
 
-export const setUrlOnAddressBar = (url, title) => { window.history.pushState(null, title, url); };
+export const setUrlOnAddressBar = (url, title) => {
+  window.history.pushState(null, title, url);
+  window.dispatchEvent(new PopStateEvent('popstate'));
+};
 
 export const prepareStartQueryString = (start) => {
   if (start === undefined) start = 0;

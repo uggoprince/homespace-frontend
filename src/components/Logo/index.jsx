@@ -1,9 +1,9 @@
 import { useAuth } from '../../auth/AuthProvider';
 
 const Logo = () => {
-  const { user } = useAuth();
+  const { user, setIsActive } = useAuth();
   return (
-    <a href="/">
+    <a href="/" onClick={() => setIsActive('home')}>
       <div
         className="
       text-primary dark:text-slate-50 py-2

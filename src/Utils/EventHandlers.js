@@ -18,7 +18,6 @@ const runSearch = (form) => {
       setNewState({ type: 'SEARCH_PROPERTIES', q: value, start: 0 });
       // setSearchUrl(newUrl);
       setUrlOnAddressBar(newUrl, 'Home');
-    //
     // history.push(newUrl);
     }
   } else if (searchTextForAgency) {

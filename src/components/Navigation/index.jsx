@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import React from 'react';
-import { useLocation, NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation, useSearchParams, NavLink } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthProvider';
 import { activePaths } from '../../Utils/paths';
 import { setNewState } from '../../Utils/Store';
@@ -93,7 +93,6 @@ const NavBlock = ({ children }) => (
 const HomeNavigation = (props) => {
   const { logout, user } = props;
   const { isActive, setIsActive, isAuthenticated: auth } = useAuth();
-  // const { profile } = user;
   const logUserOut = (e) => {
     e.preventDefault();
     setIsActive(logoutPath);
@@ -117,10 +116,35 @@ const HomeNavigation = (props) => {
   );
 };
 
-const LandingNavigation = ({ setActive }) => {
+const LandingNavigation = ({ user }) => {
   const { isActive, setIsActive } = useAuth();
+  const [searchParams] = useSearchParams();
+  const hasQuery = searchParams.has('q');
+
+  const location = useLocation();
+  const path = location.pathname.toLowerCase();
+  const queryString = location.search; // e.g., "?q=nigeria&start=0"
+
+  // Save query to sessionStorage when it exists
+  useEffect(() => {
+    if (hasQuery && queryString) {
+      sessionStorage.setItem('propertiesQuery', queryString);
+    }
+  }, [hasQuery, queryString]);
+
+  // Get saved query from sessionStorage
+  const savedQuery = sessionStorage.getItem('propertiesQuery') || '';
+  const getPropertiesPath = () => {
+    if (hasQuery) return `/${queryString}`;
+    if (savedQuery) return `/${savedQuery}`;
+    return '/';
+  };
+  const propertiesPath = getPropertiesPath();
+  const showPropsLink = !user && (hasQuery || savedQuery || path === '/agencies' || path === '/login' || path === '/signup');
+
   return (
     <NavBlock>
+      {showPropsLink && <HSLink path={propertiesPath} text="Properties" setActive={{ isActive, setIsActive }} activeText={home} />}
       <HSLink path="/agencies" text="Agencies" setActive={{ isActive, setIsActive }} activeText={agencies} />
       <HSLink path="/login" text="Log In" setActive={{ isActive, setIsActive }} activeText={login} />
       <HSLink path="/signup" text="Sign Up" setActive={{ isActive, setIsActive }} activeText={signup} />
@@ -151,11 +175,11 @@ const LoginNavigation = ({ setActive }) => {
 };
 
 const Navigation = () => {
-  const location = useLocation();
-  const path = location.pathname.toLowerCase();
+  // const location = useLocation();
+  // const path = location.pathname.toLowerCase();
   const { token, logout, user } = useAuth();
   if (token) return <HomeNavigation user={user} logout={logout} />;
-  return <LandingNavigation />;
+  return <LandingNavigation user={user} />;
 };
 
 export default Navigation;

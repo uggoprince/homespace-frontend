@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header, { HeaderBottomMargin } from '../../components/Header';
+import Header from '../../components/Header';
 import Hero from './Hero';
 import Footer from '../../components/Footer';
 import { prepareLandingPageSearch } from '../../Utils/EventHandlers';
@@ -21,7 +21,6 @@ class LandingPage extends Component {
       <BaseLayout>
         <div className="w-full h-full relative flex flex-col">
           <Header />
-          {/* <HeaderBottomMargin /> */}
           <Hero />
           <Footer />
         </div>

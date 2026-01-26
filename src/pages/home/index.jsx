@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthProvider';
-import Header, { HeaderBottomMargin } from '../../components/Header';
+import Header from '../../components/Header';
 import LandingPage from '../landing';
 import HomeBody from './body';
 import Properties from '../../data/property/PropertiesAndDetailsBox';
 import '../style.css';
 import Search from '../search';
 import { BaseLayout } from '../../layouts/base-layout';
+import { setNewState } from '../../Utils/Store';
 
 const Home = (props) => {
   const {
     children, qEmpty, start, q,
   } = props;
   const { token } = useAuth();
-  if (!token && qEmpty === true) return <LandingPage />;
+  const [searchParams] = useSearchParams();
+
+  if (!token && qEmpty === true) {
+    const hasQuery = searchParams.has('q');
+    if (hasQuery) {
+      const qStrValue = searchParams.get('q');
+      const startParam = Number.parseInt(searchParams.get('start'), 10) || 0;
+      setNewState({ type: 'SEARCH_PROPERTIES', q: qStrValue, start: startParam });
+      return <Search />;
+    }
+    return <LandingPage />;
+  }
   if (!token && qEmpty === false) {
     return <Search />;
   }

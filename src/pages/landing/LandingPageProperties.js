@@ -1,6 +1,6 @@
 import React from 'react';
-import Properties from '../../data/property/properties';
-import { GET_PROPERTIES_FOR_LANDING_PAGE as queryString } from '../../data/property/queryString';
+// import Properties from '../../data/property/properties';
+// import { GET_PROPERTIES_FOR_LANDING_PAGE as queryString } from '../../data/property/queryString';
 
 const LandingPageProperties = () => (
   <div className="container hs-max-width-85 hs-pb-100">
@@ -9,7 +9,7 @@ const LandingPageProperties = () => (
         Explore Neighborhoods
       </div>
     </div>
-    <Properties qString={queryString} />
+    {/* <Properties qString={queryString} /> */}
   </div>
 );
 
