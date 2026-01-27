@@ -1,9 +1,3 @@
 footer {
-    position: absolute;
-}
-
-@media screen and (max-height: 723px) {
-    footer {
-      position: relative;
-    }
+    position: relative;
 }

@@ -10,7 +10,7 @@ class Login extends Component {
 
   render() {
     return (
-      <BaseLayout>
+      <BaseLayout className="master h-dvh">
         <Header />
         <LoginForm />
         <Footer />

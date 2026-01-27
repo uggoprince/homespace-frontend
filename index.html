@@ -8,6 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Space</title>
 
+    <!-- Prevent dark mode flash -->
+    <script>
+      (function() {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
     <!-- Open Graph (OG) Tags -->
     <meta property="og:title" content="HomeSpace" />
     <meta property="og:description" content="Homespace helps you find a space." />

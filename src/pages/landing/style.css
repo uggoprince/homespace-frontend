@@ -1,6 +1,6 @@
 .master {
     width: 100%;
-    height: min-content;
+    min-height: 100vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -12,11 +12,12 @@
 
 .hero {
     width: 100%;
-    height: min-content;
+    height: auto;
+    min-height: 500px;
     /* overflow: auto; */
     position: relative;
     z-index: 2;
-    @apply flex flex-col justify-center flex-1;
+    @apply flex flex-col justify-center flex-1 mt-[0px];
 }
   
 .master::before {
@@ -32,6 +33,6 @@
     
     /*background: rgb(202, 202, 202);*/
     background-color: #eee;
-    opacity: 0.92;
+    opacity: 0.85;
     @apply dark:bg-slate-700 dark:bg-opacity-90;
 }

@@ -40,7 +40,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center flex-1 flex-shrink w-full h-full overflow-y-scroll page-content">
+    <div className="flex flex-col justify-center flex-1 flex-shrink w-full h-full overflow-y-auto page-content">
       <div className="container flex flex-col justify-around h-full">
         <Form submithandler={auth} method="POST" id="loginForm" formclass="loginForm">
           <div className="w-full">

@@ -45,7 +45,7 @@ class HomePage extends Component {
     const qEmpty = q === undefined;
     return (
       <Home qEmpty={qEmpty} start={propsSearchOffset} q={q}>
-        <BaseLayout css="min-h-svh">
+        <BaseLayout className="min-h-svh">
           <Header search={q} offset={propsSearchOffset} />
           <Properties property={property} number={2}>
             {/* <HeaderBottomMargin /> */}

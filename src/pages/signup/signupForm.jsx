@@ -39,7 +39,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="flex-1 flex-shrink w-full h-full overflow-y-scroll page-content">
+    <div className="flex-1 flex-shrink w-full h-full overflow-y-auto page-content">
       <div className="container flex flex-col justify-around h-full">
         <Form submithandler={auth} method="POST" id="signupForm" formclass="signupForm max-h-[80%]">
           <div className="w-full">
