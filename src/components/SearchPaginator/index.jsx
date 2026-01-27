@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Pagination from 'react-paginate';
 import './style.css';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
 const Pager = (props) => {
   const {
@@ -21,18 +22,41 @@ const Pager = (props) => {
       onPageChange={handleClick}
       forcePage={index}
       disableInitialCallback={disableInitialCallback}
-      previousLabel="Previous"
-      nextLabel="Next"
-      containerClassName="pagination flex flex-row flex-wrap align-middle"
-      pageLinkClassName="pr-4 pl-4 border-0 flex-1 pt5 pb5"
-      pageClassName="text-center flex flex-col border"
-      activeLinkClassName="bg-indigo-600 text-white"
-      breakClassName="text-center flex flex-col border"
-      breakLinkClassName="pr-4 pl-4 border-0 flex-1 pt5 pb5"
-      previousClassName="mr-2 m-auto border flex flex-col"
-      nextClassName="ml-2 m-auto border flex flex-col"
-      previousLinkClassName="flex-1 align-middle pr-4 pl-4 pt5 pb5"
-      nextLinkClassName="flex-1 align-middle pr-4 pl-4 pt5 pb5"
+      previousLabel={(
+        <span className="flex items-center gap-1">
+          <LuChevronLeft className="w-4 h-4" />
+          <span className="hidden sm:inline">Previous</span>
+        </span>
+      )}
+      nextLabel={(
+        <span className="flex items-center gap-1">
+          <span className="hidden sm:inline">Next</span>
+          <LuChevronRight className="w-4 h-4" />
+        </span>
+      )}
+      containerClassName="flex flex-wrap items-center justify-center gap-1"
+      pageLinkClassName={`min-w-[36px] sm:min-w-[40px] h-9 sm:h-10 px-2 
+        sm:px-3 py-1.5 sm:py-2 flex items-center justify-center 
+        text-xs sm:text-sm font-medium rounded-lg text-gray-700 
+        dark:text-slate-300 bg-white dark:bg-slate-800 border 
+        border-gray-200 dark:border-slate-700 hover:bg-gray-50 
+        dark:hover:bg-slate-700 transition-colors`}
+      activeLinkClassName="!bg-indigo-600 !text-white !border-indigo-600"
+      previousLinkClassName={`min-w-[36px] sm:min-w-auto h-9 sm:h-10 flex items-center 
+        justify-center gap-1 px-2 sm:px-4 py-1.5 sm:py-2 text-xs 
+        sm:text-sm font-medium text-gray-700 dark:text-slate-300 
+        bg-white dark:bg-slate-800 border border-gray-200 
+        dark:border-slate-700 rounded-lg hover:bg-gray-50 
+        dark:hover:bg-slate-700 transition-colors`}
+      nextLinkClassName={`min-w-[36px] sm:min-w-auto h-9 sm:h-10 flex 
+        items-center justify-center gap-1 px-2 sm:px-4 py-1.5 
+        sm:py-2 text-xs sm:text-sm font-medium text-gray-700 
+        dark:text-slate-300 bg-white dark:bg-slate-800 border 
+        border-gray-200 dark:border-slate-700 rounded-lg hover:bg-gray-50 
+        dark:hover:bg-slate-700 transition-colors`}
+      breakLinkClassName="min-w-[36px] sm:min-w-[40px] h-9 sm:h-10 flex items-center justify-center text-gray-400 dark:text-slate-500 text-xs sm:text-sm"
+      marginPagesDisplayed={1}
+      pageRangeDisplayed={2}
       // eslint-disable-next-line no-console
       // hrefBuilder={generateHref}
     />

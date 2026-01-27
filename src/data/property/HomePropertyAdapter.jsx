@@ -4,6 +4,7 @@ import PropertyCard from '../../components/PropertyCard';
 import Pager from '../../components/SearchPaginator';
 import { moveToNewPropertyPage } from '../../Utils/EventHandlers';
 import { PropertyCardSkeleton } from '../../components/PropertyCard/skeleton';
+import { Skeleton } from '../../components/Skeleton';
 
 const HomePropertyAdapter = (props) => {
   const {
@@ -16,8 +17,9 @@ const HomePropertyAdapter = (props) => {
     pageIndex = (offset / 10) + 1;
   }
   const isPage1 = pageIndex === 1;
-  let itemCount = <div>{`Page ${pageIndex} of ${count} results`}</div>;
-  if (isPage1) itemCount = <div>{`About ${count} results`}</div>;
+  const itemCount = loading
+    ? <Skeleton variant="text" width={180} height={28} />
+    : <div>{isPage1 ? `About ${count} results` : `Page ${pageIndex} of ${count} results`}</div>;
 
   return (
     <div className="w-full container min-h-full space-y-6">
