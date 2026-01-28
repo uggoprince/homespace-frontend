@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { HiChevronUp } from 'react-icons/hi';
@@ -11,7 +9,7 @@ const Footer = () => {
   };
   return (
     <footer className="bg-white dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800 w-full transition-colors">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto">
         {/* Top row */}
         <div className="py-2 sm:py-4 flex flex-col lg:flex-row items-center justify-between gap-6 border-b border-gray-100 dark:border-slate-800/50">
 
@@ -27,12 +25,12 @@ const Footer = () => {
 
           {/* Navigation */}
           <nav className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 gap-y-2">
-            <a
+            {/* <a
               href="/properties"
               className="text-sm text-gray-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 cursor-pointer"
             >
               Properties
-            </a>
+            </a> */}
             <a
               href="/agencies"
               className="text-sm text-gray-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 cursor-pointer"
@@ -55,34 +53,35 @@ const Footer = () => {
 
           {/* Social Icons */}
           <div className="flex items-center gap-2">
-            <a
-              href="#"
+            <button
+              type="button"
               aria-label="Facebook"
               className="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-200 hover:scale-110 cursor-pointer"
             >
               <FaFacebook className="w-5 h-5" />
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              type="button"
               aria-label="Instagram"
               className="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 dark:text-slate-400 hover:bg-pink-50 dark:hover:bg-pink-900/30 hover:text-pink-600 dark:hover:text-pink-400 transition-all duration-200 hover:scale-110 cursor-pointer"
             >
               <FaInstagram className="w-5 h-5" />
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              type="button"
               aria-label="X (Twitter)"
               className="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-gray-900 dark:hover:text-white transition-all duration-200 hover:scale-110 cursor-pointer"
             >
               <FaXTwitter className="w-5 h-5" />
-            </a>
-            <a
-              // href="https://wa.me/2341234567890"
+            </button>
+            <button
+              type="button"
+              // onClick={() => window.open('https://wa.me/2341234567890', '_blank')}
               aria-label="WhatsApp"
               className="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 dark:text-slate-400 hover:bg-green-50 dark:hover:bg-green-900/30 hover:text-green-600 dark:hover:text-green-400 transition-all duration-200 hover:scale-110 cursor-pointer"
             >
               <FaWhatsapp className="w-5 h-5" />
-            </a>
+            </button>
           </div>
         </div>
 
