@@ -49,7 +49,18 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const cache = new InMemoryCache({ addTypename: true });
+const cache = new InMemoryCache({
+  addTypename: true,
+  typePolicies: {
+    Property: {
+      fields: {
+        photos: {
+          merge: false,
+        },
+      },
+    },
+  },
+});
 
 // eslint-disable-next-line no-unused-vars
 const client = new ApolloClient({

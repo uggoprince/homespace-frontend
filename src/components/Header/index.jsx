@@ -51,7 +51,6 @@ const SearchBar = (props) => {
               e.target.form.requestSubmit();
             }
           }}
-          defaultValue={searchText}
           placeholder="Search location, property type..."
           className={`flex-1 bg-transparent text-gray-900 dark:text-white 
             placeholder-gray-500 dark:placeholder-slate-500 outline-none 

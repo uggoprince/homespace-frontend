@@ -13,6 +13,7 @@ import Dashboard from '../pages/dashboard';
 import MyAgencies from '../pages/dashboard/agencies';
 import MyAgency from '../pages/agency/MyAgencyBody';
 import Agency from '../pages/agency/agency';
+import Property from '../pages/property';
 import Profile from '../pages/profile/index';
 import { DashboardTabs } from '../pages/dashboard/DashboardTabs';
 import { useAuth } from '../auth/AuthProvider';
@@ -34,6 +35,7 @@ const Router = (props) => {
       <Route exact path="/login" element={<Signin><Login /></Signin>} />
       <Route exact path="/agencies" element={<Agencies />} />
       <Route exact path="/agencies/:username" element={<Agency />} />
+      <Route exact path="/properties/:propertyId" element={<Property />} />
       <Route exact path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>}>
         <Route index element={<DashboardTabs />} />
         {/* <Route path="agencies" element={<MyAgencies />} /> */}

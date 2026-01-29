@@ -7,7 +7,7 @@ const { q } = getSearchString();
 let { start } = getSearchString();
 start = prepareStartQueryString(start);
 const initialState = {
-  q, propsSearchOffset: Number(start), propsSearchLimit: 10, w: q, agencySearchOffset: Number(start), agencySearchLimit: 10, /* token: getLocalStorage('token'), */
+  q, propsSearchOffset: Number(start), propsSearchLimit: 12, w: q, agencySearchOffset: Number(start), agencySearchLimit: 12, /* token: getLocalStorage('token'), */
 };
 
 const reducer = (state = initialState, action) => {

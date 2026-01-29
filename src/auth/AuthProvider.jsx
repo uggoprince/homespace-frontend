@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import {
   useNavigate,
+  useLocation,
 } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import {
@@ -24,9 +25,11 @@ const AuthProvider = (props) => {
   const updateIsAuth = (value) => {
     isAuthenticated.current = value;
   };
-  const path = window.location.pathname.toLowerCase();
+  const location = useLocation();
+  const path = location.pathname.toLowerCase();
   const str = path === '/' ? 'home' : path.replace('/', '');
   const isActive = useRef(str);
+  isActive.current = str;
   const isActiveMenuItem = useRef('');
   const client = useApolloClient();
 
@@ -67,7 +70,7 @@ const AuthProvider = (props) => {
     else navigate('/');
   };
 
-  const value = {
+  const value = React.useMemo(() => ({
     token: token.current,
     user: user.current,
     updateUser,
@@ -80,7 +83,20 @@ const AuthProvider = (props) => {
     setIsActive,
     isActiveMenuItem,
     setIsActiveMenuItem,
-  };
+  }), [
+    token.current,
+    user.current,
+    isAuthenticated.current,
+    updateUser,
+    updateIsAuth,
+    handleLogin,
+    handleLogout,
+    clearStorage,
+    isActive,
+    setIsActive,
+    isActiveMenuItem,
+    setIsActiveMenuItem,
+  ]);
 
   return (
     <AuthContext.Provider value={value}>

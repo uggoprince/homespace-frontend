@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header, { HeaderBottomMargin } from '../../components/Header';
+import Header from '../../components/Header';
 import Agencies from '../../data/agency/Agencies';
 import AgenciesView from '../../data/agency/AgenciesView';
 import { GET_AGENCIES } from '../../data/agency/queryString';
@@ -13,7 +13,7 @@ class AgenciesPage extends Component {
   render() {
     const { w } = this.props;
     return (
-      <BaseLayout css="min-h-svh">
+      <BaseLayout className="min-h-svh">
         <Header />
         <AgenciesView>
           {/* <HeaderBottomMargin /> */}

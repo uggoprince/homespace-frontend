@@ -23,7 +23,7 @@ class PropertyCard extends Component {
       photos, intent, price, propertyType, address, currency, country,
     } = property;
     let photo1;
-    if (photos.length > 0 && photos[0] !== null) {
+    if (photos && photos.length > 0 && photos[0] !== null) {
       const { photo } = photos[0];
       photo1 = photo;
     }

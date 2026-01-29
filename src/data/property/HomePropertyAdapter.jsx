@@ -14,7 +14,7 @@ const HomePropertyAdapter = (props) => {
   const { properties, count = 0 } = data;
   let pageIndex = 0;
   if (!loading && data) {
-    pageIndex = (offset / 10) + 1;
+    pageIndex = (offset / 12) + 1;
   }
   const isPage1 = pageIndex === 1;
   const itemCount = loading
@@ -22,7 +22,7 @@ const HomePropertyAdapter = (props) => {
     : <div>{isPage1 ? `About ${count} results` : `Page ${pageIndex} of ${count} results`}</div>;
 
   return (
-    <div className="w-full container min-h-full space-y-6">
+    <div className="w-full min-h-full space-y-6">
       <div className="w-auto mt-6 text-lg dark:text-white">
         {itemCount}
       </div>
@@ -36,7 +36,7 @@ const HomePropertyAdapter = (props) => {
         )}
         {!loading && properties?.map((propObj) => <PropertyCard key={propObj.id} property={propObj} number={number} />)}
       </div>
-      <div className=" w-full">
+      <div className="w-full pt-3">
         <Pager counted={count} offset={offset} pageChanger={moveToNewPropertyPage} />
       </div>
     </div>

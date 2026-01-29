@@ -36,9 +36,9 @@ export const prepareStartQueryString = (start) => {
   if (start === undefined) start = 0;
   if (Number(start).toString() === 'NaN') start = 0;
   if (start !== 0) {
-    const k = start / 10;
+    const k = start / 12;
     const l = Math.floor(k);
-    const m = l * 10;
+    const m = l * 12;
     start = m;
   }
   return start;

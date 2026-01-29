@@ -95,7 +95,7 @@ export const closeCardDetails = (e, num) => {
 
 export const moveToNewPropertyPage = (data) => {
   const { selected } = data;
-  const offset = selected * 10;
+  const offset = selected * 12;
   const { q } = getSearchString();
   let newUrl;
   if (q) newUrl = computeSearchUrl(q, offset);
@@ -106,7 +106,7 @@ export const moveToNewPropertyPage = (data) => {
 
 export const moveToNewAgencyPage = (data) => {
   const { selected } = data;
-  const offset = selected * 10;
+  const offset = selected * 12;
   const { q } = getSearchString();
   let newUrl;
   if (q) newUrl = computeSearchUrl(q, offset, '/agencies');

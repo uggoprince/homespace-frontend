@@ -62,3 +62,28 @@ export const GET_PROPERTIES_START_WITH_COUNTRY = gql`
   }
 }
 `;
+
+export const GET_PROPERTY_DETAILS = gql`
+query ($id: ID!) {
+  getProperty(id: $id) {
+    id
+    address
+    propertyType
+    title
+    description
+    price
+    intent
+    units
+    state
+    country
+    currency
+    area
+    bedRooms
+    bathRooms
+    status
+    createdAt
+    agency { id, name, address, username, email }
+    photos { photo }
+  }
+}
+`;

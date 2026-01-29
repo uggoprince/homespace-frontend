@@ -7,20 +7,24 @@ const Pager = (props) => {
   const {
     counted, offset, pageChanger,
   } = props;
-  const totalPageCount = Math.ceil(counted / 10);
+  const totalPageCount = Math.ceil(counted / 12);
   const handleClick = (data) => {
     pageChanger(data);
   };
   const disableInitialCallback = true;
-  const [index, setIndex] = useState((offset / 10));
+  const [index, setIndex] = useState((offset / 12));
   useEffect(() => {
-    setIndex((offset / 10));
+    setIndex((offset / 12));
   }, [offset]);
+  const safeIndex = totalPageCount > 0 ? Math.min(index, totalPageCount - 1) : 0;
+  if (totalPageCount <= 0) {
+    return null;
+  }
   return (
     <Pagination
       pageCount={totalPageCount}
       onPageChange={handleClick}
-      forcePage={index}
+      forcePage={safeIndex}
       disableInitialCallback={disableInitialCallback}
       previousLabel={(
         <span className="flex items-center gap-1">

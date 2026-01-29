@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HomePropertyAdapter from './HomePropertyAdapter';
+import ErrorHandler from '../errorHandler';
 import { queryApi } from '../../Utils/Api';
 import './style.css';
 
@@ -10,7 +11,9 @@ const SearchProperties = (props) => {
   const {
     qString, q, offset, limit, searchType,
   } = props;
-  const { loading, error, data } = queryApi(qString, { search: q, offset, limit });
+  const {
+    loading, error, data, refetch,
+  } = queryApi(qString, { search: q, offset, limit });
   const [properties, setProperties] = useState({});
   useEffect(() => {
     if (data) {
@@ -26,17 +29,17 @@ const SearchProperties = (props) => {
     }
   }, [loading]);
   if (error) {
-    return `Error! ${error.message}`;
+    return <ErrorHandler error={error} onRetry={refetch} />;
   }
   return (
-    <div className="searchProperties">
-      <HomePropertyAdapter
-        number={searchType}
-        loading={loading}
-        data={properties}
-        offset={offset}
-      />
-    </div>
+  // <div className="searchProperties">
+    <HomePropertyAdapter
+      number={searchType}
+      loading={loading}
+      data={properties}
+      offset={offset}
+    />
+  // </div>
   );
 };
 

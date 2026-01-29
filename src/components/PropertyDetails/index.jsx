@@ -29,8 +29,8 @@ const PropertyDetailsSideView = (props) => {
   bathRooms = (!isEmptyString(bathRooms) ? bathRooms : null);
   title = capitalizeFirstLetter(title);
 
-  const numberOfPhotos = photos.length;
-  const currentPhoto = photos[currentImage]?.photo || '';
+  const numberOfPhotos = photos?.length || 0;
+  const currentPhoto = photos?.[currentImage]?.photo || '';
 
   const formatPrice = (priceValue, countryName, curr) => {
     const currencyCode = curr || countryToCurrency[countryName];

@@ -26,19 +26,11 @@ const Agencies = (props) => {
       setAgenciesData(data[queryName]);
     }
   }, [data]);
-  /* useEffect(() => {
-    if (reFetchMyAgencies) {
-      refetch().then((res) => {
-        setDoneRefetching(true);
-      }).catch((err) => {
-        setDoneRefetching(true);
-      });
-    }
-  }, [reFetchMyAgencies]); */
+
   return (
     <div className="w-full min-h-full mx-auto">
       {/* {loading && 'Loading...'} */}
-      {!loading && error && <ErrorHandler error={error} />}
+      {!loading && error && <ErrorHandler onRetry={refetch} error={error} />}
       {(networkStatus === NetworkStatus.refetch) && 'Refetching!'}
       {!error && (
       <AgencyAdapter

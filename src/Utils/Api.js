@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useLazyQuery } from '@apollo/client';
 
-export const queryApi = (qString, payLoad, skip = false, ...rest) => useQuery(qString, {
-  variables: payLoad, notifyOnNetworkStatusChange: true, skip,
+export const queryApi = (qString, payLoad, skip = false, options = {}) => useQuery(qString, {
+  variables: payLoad, notifyOnNetworkStatusChange: true, skip, ...options,
 });
 
 export const mutateApi = (qString, ...rest) => useMutation(qString, { errorPolicy: 'all', ...rest });
