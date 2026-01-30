@@ -14,8 +14,8 @@ const DisabledContactButton = ({ icon: Icon, label }) => (
     type="button"
     disabled
     className="inline-flex items-center gap-2 bg-slate-300
-    dark:bg-slate-700 text-slate-500 dark:text-slate-400 px-5 py-2.5
-    rounded-xl font-medium cursor-not-allowed opacity-50"
+    dark:bg-slate-700 text-slate-500 dark:text-slate-400 py-2 px-4
+    rounded-lg font-medium cursor-not-allowed opacity-50"
   >
     <Icon className="w-4 h-4" />
     <span>{label}</span>
@@ -29,7 +29,9 @@ const Agency = () => {
   });
   const navigate = useNavigate();
   const { username } = useParams();
-  const { loading, error, data } = queryApi(GET_AGENCY, { username }, false);
+  const {
+    loading, error, data, refetch,
+  } = queryApi(GET_AGENCY, { username }, false);
   const { agency, activeTab } = state;
 
   useEffect(() => {
@@ -56,15 +58,15 @@ const Agency = () => {
         </div>
       )}
 
-      {error && <ErrorHandler error={error} />}
+      {error && <ErrorHandler type="agency" onRetry={() => refetch()} error={error} />}
 
       {agency && !error && !loading && (
-      <main className="max-w-7xl mx-auto py-8 pt-24">
+      <main className="max-w-7xl mx-auto py-6 pt-24 space-y-4 lg:space-y-6">
         {/* Back Button */}
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group"
         >
           <FaArrowLeft className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" />
           <span>Back to agencies</span>
@@ -148,7 +150,7 @@ const Agency = () => {
                     icon={LuPhone}
                     iconPosition="left"
                     external
-                    className="rounded-lg hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25
+                    className="rounded-lg hover:scale-[1.02] hover:shadow-lg hover:shadow-indigo-500/25
                       transition-all"
                   >
                     {formatPhone(agency.phoneNumber)}
@@ -167,7 +169,7 @@ const Agency = () => {
                     icon={LuMail}
                     iconPosition="left"
                     external
-                    className="rounded-lg hover:scale-105 transition-all border border-slate-300
+                    className="rounded-lg hover:scale-[1.02] transition-all border border-slate-300
                       dark:border-slate-700"
                     iconClassName="w-4 h-4"
                   >
@@ -204,7 +206,7 @@ const Agency = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-8 bg-slate-200/50 dark:bg-slate-900/50 p-1.5 rounded-xl w-fit">
+        <div className="flex gap-1 bg-slate-200/50 dark:bg-slate-900/50 p-1.5 rounded-xl w-fit">
           {['properties', 'about', 'reviews'].map((tab) => (
             <button
               type="button"

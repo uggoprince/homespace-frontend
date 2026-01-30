@@ -1,22 +1,11 @@
-.default-button {
-    @apply
-    w-full
-    hover:bg-blue-700
-    focus:outline-none
-    focus:ring-2
-    focus:ring-purple-600
-    focus:ring-opacity-50
-    text-white
-    py-2 px-2
-    rounded font-bold
-}
+/* Button Component Styles */
+
+/* Additional styles if needed beyond Tailwind */
 .custom-button {
-    @apply
-    w-full
-    focus:outline-none
-    focus:ring-2
-    focus:ring-opacity-50
-    text-white
-    py-2 px-2
-    rounded font-bold
+  text-decoration: none;
+}
+
+.custom-button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }

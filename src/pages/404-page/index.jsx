@@ -1,9 +1,12 @@
-const PageNotFound = () => (
-  <div id="wrapper">
-    <div id="info">
-      <h3>This page could not be found</h3>
-    </div>
-  </div>
+import Header from '../../components/Header';
+import { BaseLayout } from '../../layouts/base-layout';
+import NotFoundContent from './content';
+
+const PageNotFound = ({ type = 'page', onRetry }) => (
+  <BaseLayout className="w-full min-ht-vh relative">
+    <Header />
+    <NotFoundContent type={type} onRetry={onRetry} />
+  </BaseLayout>
 );
 
 export default PageNotFound;

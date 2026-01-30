@@ -142,7 +142,7 @@ export default (props) => {
             </Group>
           </div>
           <Container classlist="mb-6">
-            <Button id="createAgencyButton" type="submit" text="Create Agency" />
+            <Button id="createAgencyButton" type="submit">Create Agency</Button>
           </Container>
         </Form>
       </div>

@@ -1,4 +1,4 @@
-import { CustomButton as Button } from '../../components/Button';
+import { CustomButton as Button } from '../../components/Button/CustomButton';
 import Modal from '../../components/Modal';
 import CreateAgency from '../agency/form/createAgency';
 import useModal from '../../components/Modal/useModal';
@@ -20,17 +20,12 @@ export const ProfileBody = (props) => {
           <div className="w-[100%] bg-slate-100 dark:bg-slate-600 px-3 py-3 box-border flex flex-row place-content-end">
             <span className="order-last">
               <Button
-                inactive={hasAgency}
-                classname={`
-                  bg-primary
-                  hover:bg-blue-600
-                  focus:ring-purple-600
-                  ${hasAgency ? 'cursor-not-allowed opacity-50' : ' cursor-pointer'}
-                `}
-                handleclick={(e) => handleOpen()}
-                text="Create Agency"
+                disabled={hasAgency}
+                onClick={() => handleOpen()}
                 type="button"
-              />
+              >
+                Create Agency
+              </Button>
             </span>
           </div>
         </div>

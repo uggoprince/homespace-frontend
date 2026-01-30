@@ -9,6 +9,7 @@ import { closeCardDetails } from '../../Utils/EventHandlers';
 import { countryNameToCode } from '../../Utils/constants';
 import isEmptyString from '../../Utils/Checkers';
 import Link from '../Link';
+import { CustomLink } from '../Link/CustomLink';
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -208,40 +209,37 @@ const PropertyDetailsSideView = (props) => {
 
         {/* Action Buttons */}
         <div className="space-y-3">
-          <Link
+          <CustomLink
             to={`/properties/${property.id}`}
-            variant="primary"
-            size="md"
-            className="w-full rounded-lg hover:bg-blue-700"
+            className="hover:bg-blue-700"
           >
             View Full Details
-          </Link>
+          </CustomLink>
           <div className="grid grid-cols-2 gap-3">
-            <Link
+            <CustomLink
               href={`tel:${agency.phone}`}
               variant="secondary"
-              size="md"
               icon={FaPhone}
               iconPosition="left"
               external
-              className="w-full rounded-lg text-white hover:bg-blue-700
+              className="text-white hover:bg-blue-700
               bg-indigo-600 dark:bg-indigo-600 disabled:hover:bg-indigo-600"
               disabled={!agency.phone}
             >
               Call
-            </Link>
-            <Link
+            </CustomLink>
+            <CustomLink
               href={`https://wa.me/${agency.phone?.replace(/\D/g, '')}`}
               variant="secondary"
               size="md"
               icon={FaWhatsapp}
               iconPosition="left"
               external
-              className={`w-full rounded-lg text-white bg-green-600 hover:bg-green-700 dark:bg-green-600 ${!agency.phone ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`text-white bg-green-600 hover:bg-green-700 dark:bg-green-600 ${!agency.phone ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={!agency.phone}
             >
               WhatsApp
-            </Link>
+            </CustomLink>
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@ const LoginForm = () => {
             </InputContainer>
           </div>
           <InputContainer>
-            <Button id="loginButton" type="submit" text="Login" disable={loading} />
+            <Button id="loginButton" type="submit" disabled={loading}>Login</Button>
           </InputContainer>
         </Form>
       </div>

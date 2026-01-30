@@ -78,7 +78,7 @@ const SignupForm = () => {
             </Group>
           </div>
           <Container>
-            <Button id="signupButton" type="submit" text="Sign Up" disable={loading} />
+            <Button id="signupButton" type="submit" disabled={loading}>Sign Up</Button>
           </Container>
         </Form>
       </div>

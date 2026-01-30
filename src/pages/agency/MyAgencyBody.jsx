@@ -18,7 +18,7 @@ import ErrorHandler from '../../data/errorHandler';
 import Modal from '../../components/Modal';
 import useModal from '../../components/Modal/useModal';
 import { setImageForUpload } from '../../Utils/EventHandlers';
-import { CustomButton as Button } from '../../components/Button';
+import { CustomButton as Button } from '../../components/Button/CustomButton';
 import Alert, { notify } from '../../components/Alert';
 import './style.css';
 
@@ -195,24 +195,15 @@ const Agency = (props) => {
               type="button"
             /> */}
             <Button
-              classname={`
-                bg-indigo-600
-                hover:bg-blue-600
-                focus:ring-purple-600
-                min-w-fit
-                w-[85px]
-                ${loadingBanner ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
-              handleclick={handleBannerUpload}
-              inactive={loadingBanner}
-              text={(
-                <span className="flex flex-row items-center justify-between place-content-center">
-                  <FaCloudUploadAlt className="text-xl self-center" />
-                  {' '}
-                  <div className="inline-block self-center">Apply</div>
-                </span>
-                )}
+              className="min-w-fit w-[85px]"
+              onClick={handleBannerUpload}
+              disabled={loadingBanner}
+              icon={FaCloudUploadAlt}
+              iconClassName="text-xl"
               type="button"
-            />
+            >
+              Apply
+            </Button>
           </div>
         </div>
       </Modal>

@@ -31,7 +31,7 @@ const PropertyLeftColumn = ({
   toggleGallery, toggleSaved, toggleShareMenu, prevImage, nextImage,
   setCurrentImage, formatPrice,
 }) => (
-  <div className="lg:col-span-2 space-y-6">
+  <div className="lg:col-span-2 space-y-4 lg:space-y-6">
     {/* Image Gallery */}
     <div
       className="bg-white dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl
