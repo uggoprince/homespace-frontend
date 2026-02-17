@@ -1,11 +1,12 @@
+@reference "../../app/globals.css";
 .prop-card {
     /* min-width: 280px; */
     width: 100%;
     /* max-width: 280px; */
     box-shadow: 0px 0px 5px #aaaaaa;
-    @apply rounded-lg cursor-pointer 
-    self-start font-roboto dark:bg-darkMode
-    text-textColor;
+    @apply rounded-lg cursor-pointer
+    self-start font-roboto dark:bg-dark-mode
+    text-text;
     /* Reset button styles */
     border: none;
     background: none;
@@ -18,6 +19,7 @@
 .prop-card:hover {
     transform: translateY(-2px);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 0;
 }
 
 .prop-card:focus-visible {
@@ -26,8 +28,8 @@
 }
 .prop-card-skeleton {
     width: 100%;
-    max-width: 280px;
-    @apply rounded-lg cursor-pointer self-start font-roboto text-textColor;
+    /* max-width: 280px; */
+    @apply rounded-lg cursor-pointer self-start font-roboto text-text;
 }
 .card-image {
     width: 100%;
@@ -53,7 +55,7 @@
     left-2
     text-white
     top-2
-    bg-textColor/60
+    bg-text/60
     shadow-[0_0px_5px_1px_#ffffff]
     shadow-white
     py-1
