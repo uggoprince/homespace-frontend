@@ -1,8 +1,8 @@
 node_modules/
-package-lock.json
 .env
 .env2
 .DS_Store
-dist
-dist-ssr
 *.local
+.next
+*.tsbuildinfo
+.env*.local
