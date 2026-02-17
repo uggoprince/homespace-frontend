@@ -1,24 +1,25 @@
+@reference "../../app/globals.css";
 .agency-card {
     width: 100%;
     box-shadow: 0px 0px 4px #bbb;
     @apply
     bg-white
-    dark:bg-darkMode
+    dark:bg-dark-mode
     block
     rounded-lg
-    text-textColor
-    font-open_sans;
+    text-text
+    font-open-sans;
 }
 
 .agency-card-skeleton {
     width: 100%;
     @apply
     bg-white
-    dark:bg-darkMode
+    dark:bg-dark-mode
     block
     rounded-lg
-    text-textColor
-    font-open_sans;
+    text-text
+    font-open-sans;
 }
 .card-header {
     @apply px-2 py-2
