@@ -17,10 +17,10 @@ export default function ConditionalWrapper({ children }: Readonly<ConditionalWra
   const q = searchParams.get('q') || '';
   const isAuthenticated = auth?.isAuthenticated || initialAuth.isAuthenticated;
 
+  const isAuthPage = pathname === '/login' || pathname === '/signup';
   // Apply master class for home (landing), login, and signup pages
-  const shouldApplyMaster = (pathname === '/' || pathname === '/login' || pathname === '/signup')
-    && !isAuthenticated
-    && !q;
+  // Auth pages always get the master class to prevent flash during post-login redirect
+  const shouldApplyMaster = isAuthPage || (pathname === '/' && !isAuthenticated && !q);
 
   return (
     <div className={`w-full min-h-screen relative flex flex-col dark:text-white${shouldApplyMaster ? ' master' : ''}`}>
