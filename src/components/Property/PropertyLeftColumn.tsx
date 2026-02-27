@@ -43,12 +43,14 @@ interface PropertyLeftColumnProps {
   nextImage: () => void;
   setCurrentImage: (index: number) => void;
   formatPrice: (price: number, country?: string, currency?: string) => string;
+  canViewLargeImage?: boolean;
 }
 
 const PropertyLeftColumn = ({
   property, photos, currentImage, numberOfPhotos, isSaved, showShareMenu,
   toggleGallery, toggleSaved, toggleShareMenu, prevImage, nextImage,
   setCurrentImage, formatPrice,
+  canViewLargeImage = true,
 }: PropertyLeftColumnProps) => (
   <div className="lg:col-span-2 space-y-4 lg:space-y-6">
     {/* Image Gallery */}
@@ -151,7 +153,7 @@ const PropertyLeftColumn = ({
           </>
         )}
 
-        {numberOfPhotos > 0 && (
+        {numberOfPhotos > 0 && canViewLargeImage && (
           <div
             className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60
             backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full opacity-70 cursor-pointer"

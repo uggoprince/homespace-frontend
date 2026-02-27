@@ -23,9 +23,9 @@ const ErrorDisplay = ({ message, onRetry, showBackButton }: { message: string; o
       </p>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <Button onClick={onRetry || (() => globalThis.location.reload())} className='cursor-pointer'>
+        <Button onClick={() => onRetry?.() || (() => globalThis.location.reload())} className='cursor-pointer'>
           <RotateCcw className="w-5 h-5" />
-          Try Again
+          Retry
         </Button>
         {showBackButton && (
           <Button

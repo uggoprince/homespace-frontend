@@ -6,7 +6,8 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/providers/AuthProvider';
 import { useInitialAuth } from '@/providers/InitialAuthProvider';
 import './style.css';
-import { Menu } from 'lucide-react';
+import { Building, CircleUserRound, House, LayoutDashboard, LogInIcon, LogOut, Menu, User, UserPlus, Users } from 'lucide-react';
+import { PATHS } from '@/Utils/paths';
 
 const activePaths = {
   home: 'home',
@@ -33,11 +34,12 @@ interface HSLinkProps {
     setIsActive: (p: string) => void;
   };
   isAuth?: boolean;
+  Icon?: React.ElementType;
 }
 
 const HSLink = (props: HSLinkProps) => {
   const {
-    path, text, setActive, activeText, isAuth,
+    path, text, setActive, activeText, isAuth, Icon
   } = props;
   const { isActive, setIsActive } = setActive;
   return (
@@ -50,9 +52,12 @@ const HSLink = (props: HSLinkProps) => {
           }
           setIsActive(activeText);
         }}
-        className={`nav-link
-          ${(isActive?.current?.startsWith(activeText) ? 'bg-indigo-600 text-white' : 'text-primary dark:text-slate-50')}`}
+        className={`nav-link flex gap-2 items-center
+          ${(isActive?.current?.startsWith(activeText) 
+      ? 'bg-indigo-600 text-white' 
+      : 'text-primary dark:text-slate-50')}`}
       >
+        {Icon && <Icon className="size-4" />}
         {text}
       </Link>
     </li>
@@ -62,16 +67,18 @@ const HSLink = (props: HSLinkProps) => {
 interface HSButtonProps {
   handler: (e: React.MouseEvent) => void;
   text: string;
+  Icon?: React.ElementType;
 }
 
 const HSButton = (props: HSButtonProps) => {
-  const { handler, text } = props;
+  const { handler, text, Icon } = props;
   return (
     <button
       type="button"
       onClick={handler}
       className="nav-button"
     >
+      {Icon && <Icon className="size-4" />}
       {text}
     </button>
   );
@@ -106,41 +113,30 @@ const NavBlock = ({ children }: { children: React.ReactNode }) => {
         ref={menuRef}
         className="hidden
         absolute
-        border-primary
+        border-slate-800
         top-12
         right-1
         z-50
         border-2 rounded
         bg-white
         dark:bg-slate-950
-        md:visible
-        md:bg-transparent
-        md:right-0
-        md:top-0
-        md:w-auto
-        md:flex
-        md:relative
-        md:border-solid
-        md:border-0
-        md:border-transparent"
+        lg:visible
+        lg:bg-transparent
+        lg:right-0
+        lg:top-0
+        lg:w-auto
+        lg:flex
+        lg:relative
+        lg:border-solid
+        lg:border-0
+        lg:border-transparent"
         id="navMenu"
         onClickCapture={closeMenu}
       >
         {children}
       </ul>
       <button type="button" className="py-2" id="navMenuButton" aria-label="Toggle menu" onClick={toggleMenu}>
-        {/* <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 0 24 24"
-          width="24px"
-          fill="#000000"
-          className="md:hidden cursor-pointer block dark:fill-white"
-        >
-          <path d="M0 0h24v24H0V0z" fill="none" />
-          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-        </svg> */}
-        <Menu className="md:hidden cursor-pointer block dark:fill-white" />
+        <Menu className="lg:hidden cursor-pointer block dark:fill-white" />
       </button>
     </nav>
   );
@@ -173,11 +169,27 @@ const HomeNavigation = (props: HomeNavigationProps) => {
   };
   return (
     <NavBlock>
-      <HSLink path="/" text="Home" isAuth={!!auth} setActive={{ isActive: isActive!, setIsActive: setIsActive! }} activeText={home} />
-      <HSLink path="/agencies" text="Agencies" setActive={{ isActive: isActive!, setIsActive: setIsActive! }} activeText={agencies} />
-      {showDashboard && <HSLink path="/dashboard" text="Dashboard" setActive={{ isActive: isActive!, setIsActive: setIsActive! }} activeText={dashboard} />}
-      <HSLink path="/profile" text="Profile" setActive={{ isActive: isActive!, setIsActive: setIsActive! }} activeText={profilePath} />
-      <HSButton text="Sign Out" handler={logUserOut} />
+      <HSLink path={PATHS.home} text="Home"
+        Icon={Building}
+        isAuth={!!auth}
+        setActive={{ isActive: isActive!, setIsActive: setIsActive! }}
+        activeText={home} />
+      <HSLink path={PATHS.agencies}
+        Icon={Users}
+        text="Agencies"
+        setActive={{ isActive: isActive!, setIsActive: setIsActive! }}
+        activeText={agencies} />
+      {showDashboard && 
+        <HSLink path={PATHS.dashboard}
+          text="Dashboard"
+          Icon={LayoutDashboard}
+          setActive={{ isActive: isActive!, setIsActive: setIsActive! }}
+          activeText={dashboard} />}
+      <HSLink path={PATHS.profile} text="Profile"
+        Icon={CircleUserRound}
+        setActive={{ isActive: isActive!, setIsActive: setIsActive! }}
+        activeText={profilePath} />
+      <HSButton text="Sign Out" handler={logUserOut} Icon={LogOut} />
     </NavBlock>
   );
 };
@@ -188,11 +200,11 @@ const LandingNavigation = ({ user }: { user: User | null }) => {
   const hasQuery = searchParams.has('q');
 
   const pathname = usePathname();
-  const path = pathname?.toLowerCase() || '/';
+  const path = pathname?.toLowerCase() || PATHS.home;
   const queryString = searchParams.toString();
 
   // Save query to sessionStorage when it exists
-  if (typeof window !== 'undefined' && hasQuery && queryString) {
+  if (globalThis.window !== undefined && hasQuery && queryString) {
     sessionStorage.setItem('propertiesQuery', `?${queryString}`);
   }
 
@@ -209,14 +221,29 @@ const LandingNavigation = ({ user }: { user: User | null }) => {
     return '/';
   };
   const propertiesPath = getPropertiesPath();
-  const showPropsLink = !user && (hasQuery || savedQuery || path === '/agencies' || path === '/login' || path === '/signup');
+  const showPropsLink = !user && (hasQuery || savedQuery || path === PATHS.agencies || path === PATHS.login || path === PATHS.signup);
 
   return (
     <NavBlock>
-      {showPropsLink && <HSLink path={propertiesPath} text="Properties" setActive={{ isActive: isActive!, setIsActive: setIsActive! }} activeText={home} />}
-      <HSLink path="/agencies" text="Agencies" setActive={{ isActive: isActive!, setIsActive: setIsActive! }} activeText={agencies} />
-      <HSLink path="/login" text="Log In" setActive={{ isActive: isActive!, setIsActive: setIsActive! }} activeText={login} />
-      <HSLink path="/signup" text="Sign Up" setActive={{ isActive: isActive!, setIsActive: setIsActive! }} activeText={signup} />
+      {showPropsLink && 
+        <HSLink path={propertiesPath}
+          text="Properties"
+          Icon={Building}
+          setActive={{ isActive: isActive!, setIsActive: setIsActive! }}
+          activeText={home} />}
+      <HSLink path={PATHS.agencies}
+        text="Agencies"
+        Icon={Users}
+        setActive={{ isActive: isActive!, setIsActive: setIsActive! }}
+        activeText={agencies} />
+      <HSLink path={PATHS.login} text="Log In"
+        Icon={LogInIcon}
+        setActive={{ isActive: isActive!, setIsActive: setIsActive! }}
+        activeText={login} />
+      <HSLink path={PATHS.signup} text="Sign Up"
+        Icon={UserPlus}
+        setActive={{ isActive: isActive!, setIsActive: setIsActive! }} 
+        activeText={signup} />
     </NavBlock>
   );
 };

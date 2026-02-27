@@ -15,7 +15,7 @@ const countryOptions: ComboboxOption[] = Country.getAllCountries().map((c) => ({
   label: c.name,
 }))
 
-export function CreateAgencyForm({ onSuccess }: { onSuccess?: () => void }) {
+export function CreateAgencyForm({ onSuccess }: Readonly<{ onSuccess?: () => void }>) {
   const { form, onSubmit, loading } = useCreateAgencyForm(onSuccess)
   const control = form.control
   const selectedCountry = form.watch("country")

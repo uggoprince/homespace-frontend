@@ -200,7 +200,7 @@ const PropertyDetailsSideView = ({ property }: { property: Property }) => {
           <div className="grid grid-cols-2 gap-3">
             <a
               href={agency?.phoneNumber ? `tel:${agency.phoneNumber}` : undefined}
-              className={!agency?.phoneNumber ? 'pointer-events-none opacity-50' : ''}
+              className={agency?.phoneNumber ? 'pointer-events-none opacity-50' : ''}
             >
               <Button
                 className="w-full bg-primary hover:bg-indigo-700 text-white"
@@ -211,10 +211,10 @@ const PropertyDetailsSideView = ({ property }: { property: Property }) => {
               </Button>
             </a>
             <a
-              href={agency?.phoneNumber ? `https://wa.me/${agency.phoneNumber.replace(/\D/g, '')}` : undefined}
+              href={agency?.phoneNumber ? `https://wa.me/${agency.phoneNumber.replaceAll(/\D/g, '')}` : undefined}
               target="_blank"
               rel="noopener noreferrer"
-              className={!agency?.phoneNumber ? 'pointer-events-none opacity-50' : ''}
+              className={agency?.phoneNumber ? 'pointer-events-none opacity-50' : ''}
             >
               <Button
                 className="w-full bg-green-600 hover:bg-green-700 text-white"

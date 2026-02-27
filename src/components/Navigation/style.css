@@ -3,7 +3,7 @@
 .nav-link {
     @apply
     md:ml-5 cursor-pointer
-    font-semibold hover:bg-primary text-center
+    font-medium hover:bg-primary text-center
     hover:text-white py-2 px-3 md:rounded w-40 md:w-full
 }
 .nav-button {
@@ -12,8 +12,8 @@
     text-red-500
     dark:text-red-500
     dark:hover:text-white
-    font-semibold
-    hover:bg-primary
+    font-medium
+    hover:bg-red-500
     hover:text-white
     py-2
     px-3
@@ -22,6 +22,9 @@
     w-40
     md:w-full
     md:ml-5
+    flex
+    items-center
+    gap-2
 }
 .nav-block {
     @apply

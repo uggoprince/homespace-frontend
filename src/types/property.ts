@@ -31,6 +31,7 @@ export interface Property {
   photos: PropertyPhoto[];
   agency: Agency;
   rentPaymentPeriod?: string;
+  postedBy: "owner" | "agent";
 }
 
 export interface Agency {
@@ -52,4 +53,12 @@ export interface Agency {
   createdAt: string;
   updatedAt: string;
   properties: Property[];
+}
+
+export interface Photo {
+  id: string;
+  serverId?: string;
+  url: string;
+  file?: File;
+  existing: boolean;
 }

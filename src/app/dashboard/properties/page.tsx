@@ -1,17 +1,29 @@
 "use client";
 
-import Link from "next/link";
-import { useQuery } from "@apollo/client";
-import { GET_USER_AGENCY, GET_AGENCY_PROPERTIES } from "@/lib/graphql/agency";
+import React, { useEffect, useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_USER_AGENCY, GET_AGENCY_PROPERTIES_WITH_DESCRIPTION } from "@/lib/graphql/agency";
+import { DELETE_PROPERTY } from "@/lib/graphql/property";
+import { useDashboardStore } from "@/stores/dashboardStore";
 import { formatPrice } from "@/Utils/formatters";
 import ErrorHandler from "@/components/ErrorHandler";
+import { Ellipsis, Eye, Plus, SquarePen, Trash2 } from "lucide-react";
+import { AddLink } from "@/components/Link";
+import { PATHS, propertyEditPath, propertyPath } from "@/Utils/paths";
+import { CustomTable, type TableColumn } from "@/components/CustomTable";
+import { StatusBadge } from "@/components/Badge";
+import { DropdownMenu } from "@/components/DropdownMenu";
+import { PageHeader } from "@/components/Header/PageHeader";
+import { Property } from "@/types/property";
+import { usePropertyDetailsStore } from "@/stores/propertyDetailsStore";
+import Modal from "@/components/Modal";
+import PropertyLeftColumn from "@/components/Property/PropertyLeftColumn";
+import ConfirmDialog from "@/components/ConfirmDialog";
+import Image from "next/image";
 
 // --- SVG Icons ---
-
 const PlusIcon = () => (
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-  </svg>
+  <Plus className="w-5 h-5" />
 );
 
 const PropertyIcon = () => (
@@ -21,20 +33,19 @@ const PropertyIcon = () => (
 );
 
 // --- Loading skeleton ---
-
 const TableSkeleton = () => (
   <div className="space-y-6 animate-pulse">
     <div className="flex justify-between">
-      <div className="space-y-2">
+      {/* <div className="space-y-2">
         <div className="h-7 w-44 bg-gray-200 dark:bg-slate-800 rounded" />
         <div className="h-4 w-60 bg-gray-200 dark:bg-slate-800 rounded" />
       </div>
-      <div className="h-10 w-36 bg-gray-200 dark:bg-slate-800 rounded-xl" />
+      <div className="h-10 w-36 bg-gray-200 dark:bg-slate-800 rounded-xl" /> */}
     </div>
     <div className="bg-white dark:bg-slate-950 rounded-2xl border border-gray-200 dark:border-slate-800 overflow-hidden">
       <div className="h-12 bg-gray-100 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-800" />
-      {[...Array(3)].map((_, i) => (
-        <div key={i} className="flex items-center gap-4 px-5 py-4 border-b border-gray-100 dark:border-slate-800 last:border-0">
+      {(['row-1', 'row-2', 'row-3'] as const).map((row) => (
+        <div key={row} className="flex items-center gap-4 px-5 py-4 border-b border-gray-100 dark:border-slate-800 last:border-0">
           <div className="h-5 flex-1 bg-gray-200 dark:bg-slate-800 rounded" />
           <div className="h-5 w-16 bg-gray-200 dark:bg-slate-800 rounded-full" />
           <div className="h-5 w-20 bg-gray-200 dark:bg-slate-800 rounded" />
@@ -46,7 +57,6 @@ const TableSkeleton = () => (
 );
 
 // --- Empty state ---
-
 const EmptyState = () => (
   <div className="bg-white dark:bg-slate-950 rounded-2xl border border-gray-200 dark:border-slate-800 p-12 text-center transition-colors">
     <div className="w-16 h-16 bg-gray-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -54,118 +64,241 @@ const EmptyState = () => (
     </div>
     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No properties yet</h3>
     <p className="text-gray-500 dark:text-slate-400 mb-6">Start by adding your first property listing</p>
-    <Link
-      href="/properties/new"
-      className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium transition-colors text-sm"
-    >
-      <PlusIcon />
-      Add Your First Property
-    </Link>
+    <AddLink
+      to={PATHS.newProperty}
+      Icon={PlusIcon}
+      text="Add Your First Property"
+    />
   </div>
 );
 
-// --- Status badge ---
-
-const StatusBadge = ({ status }: { status: string }) => {
-  const isActive = status === "active";
-  return (
-    <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-        isActive
-          ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"
-          : "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"
-      }`}
-    >
-      {isActive ? "Active" : "Pending"}
-    </span>
-  );
-};
+// --- Column definitions ---
+function buildPropertyColumns(onDelete: (p: Property) => void): TableColumn<Property>[] {
+  return [
+    {
+      key: "property",
+      header: "Property",
+      render: (p) => (
+        <>
+          <p className="text-sm font-medium text-gray-900 dark:text-white max-w-65 truncate">{p.title}</p>
+          <p className="text-xs text-gray-500 dark:text-slate-500 mt-0.5 max-w-70 truncate">{p.address}</p>
+        </>
+      ),
+    },
+    {
+      key: "photo",
+      header: "Photo",
+      render: (p) => {
+        const photo = p.photos?.[0]?.photo;
+        return (
+          <div className="relative w-24 h-16 rounded-lg overflow-hidden bg-gray-100 dark:bg-slate-800 shrink-0">
+            {photo ? (
+              <Image
+                src={photo}
+                alt={p.title}
+                fill
+                className="object-cover rounded-lg"
+                sizes="100vw"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <PropertyIcon />
+              </div>
+            )}
+          </div>
+        );
+      },
+    },
+    {
+      key: "status",
+      header: "Status",
+      render: (p) => <StatusBadge status={p.status || "active"} />,
+    },
+    {
+      key: "price",
+      header: "Price",
+      render: (p) => (
+        <p className="text-sm text-gray-900 dark:text-white">
+          {formatPrice(p.price, p.country, p.currency)}
+        </p>
+      ),
+    },
+    {
+      key: "type",
+      header: "Type",
+      render: (p) => (
+        <p className="text-sm text-gray-500 dark:text-slate-400 capitalize">{p.propertyType}</p>
+      ),
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      align: "center",
+      render: (p) => (
+        <div role="none" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
+          <DropdownMenu
+            triggerLabel={<Ellipsis size={18} />}
+            menuList={[
+              {
+                label: "View",
+                icon: <Eye className="text-white size-3.5" />,
+                href: propertyPath(p.propertyCode),
+                linkClassName: "text-sm font-medium",
+              },
+              {
+                label: "Edit",
+                icon: <SquarePen className="text-white size-3.5" />,
+                href: propertyEditPath(p.propertyCode),
+                linkClassName: "text-sm font-medium",
+              },
+              {
+                label: "Delete",
+                icon: <Trash2 className="size-3.5 text-inherit" />,
+                onClick: () => onDelete(p),
+                itemClassName: "text-sm font-medium text-red-600 hover:text-white",
+              },
+            ]} />
+        </div>
+      ),
+    },
+  ];
+}
 
 export default function MyPropertiesPage() {
-  const { data: agencyData, loading: agencyLoading } = useQuery(GET_USER_AGENCY);
-  const agencyId = agencyData?.getUserAgency?.id;
+  const {
+    agency: storedAgency, agencyFetched, setAgency,
+    properties: storedProperties, setProperties, invalidateProperties,
+  } = useDashboardStore();
+
+  const { selectedProperty, setSelectedProperty, clearSelectedProperty } = usePropertyDetailsStore();
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
+  const [showShareMenu, setShowShareMenu] = useState(false);
+  const [propertyToDelete, setPropertyToDelete] = useState<Property | null>(null);
+
+  const { data: agencyData, loading: agencyLoading, error: agencyError, refetch: refetchAgency } = useQuery(GET_USER_AGENCY, {
+    skip: agencyFetched,
+    fetchPolicy: "cache-and-network",
+    notifyOnNetworkStatusChange: true,
+  });
+
+  useEffect(() => {
+    if (agencyData?.getUserAgency) setAgency(agencyData.getUserAgency);
+  }, [agencyData, setAgency]);
+
+  const agencyId = storedAgency?.id ?? agencyData?.getUserAgency?.id;
 
   const {
     data: propertiesData,
     loading: propertiesLoading,
     error,
-  } = useQuery(GET_AGENCY_PROPERTIES, {
+    refetch: refetchProperties,
+  } = useQuery(GET_AGENCY_PROPERTIES_WITH_DESCRIPTION, {
     variables: { agencyId, offset: 0, limit: 50 },
     skip: !agencyId,
+    fetchPolicy: "network-only",
+    notifyOnNetworkStatusChange: true,
   });
 
-  const loading = agencyLoading || propertiesLoading;
+  useEffect(() => {
+    if (propertiesData?.getAgencyProperties?.properties) {
+      setProperties(propertiesData.getAgencyProperties.properties);
+    }
+  }, [propertiesData, setProperties]);
 
-  if (loading) return <TableSkeleton />;
-  if (error) return <ErrorHandler error={error} showBackButton={false} />;
+  const [deleteProperty, { loading: deleting }] = useMutation(DELETE_PROPERTY, {
+    onCompleted: () => {
+      invalidateProperties();
+      refetchProperties();
+      setPropertyToDelete(null);
+    },
+  });
 
-  const properties = propertiesData?.getAgencyProperties?.properties || [];
+  const propertyColumns = buildPropertyColumns(setPropertyToDelete);
+
+  const loading = (!agencyFetched && agencyLoading) || propertiesLoading;
+
+  if (agencyError) return <ErrorHandler error={agencyError} showBackButton={false} onRetry={() => { refetchAgency(); }} />;
+  if (error) return <ErrorHandler error={error} showBackButton={false} onRetry={() => refetchProperties()} />;
+
+  const properties = storedProperties.length > 0 ? storedProperties : (propertiesData?.getAgencyProperties?.properties ?? []);
+
+  let content: React.ReactNode;
+  if (loading) {
+    content = <TableSkeleton />;
+  } else if (properties.length > 0) {
+    content = (
+      <CustomTable
+        columns={propertyColumns}
+        data={properties}
+        keyExtractor={(p) => p.id}
+        pageSize={10}
+        itemLabel="properties"
+        onRowClick={setSelectedProperty}
+      />
+    );
+  } else {
+    content = <EmptyState />;
+  }
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">My Properties</h1>
-          <p className="text-gray-500 dark:text-slate-400 text-sm mt-1">Manage your property listings</p>
-        </div>
-        <Link
-          href="/properties/new"
-          className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-lg font-medium transition-colors text-sm"
-        >
-          <PlusIcon />
-          Add Property
-        </Link>
-      </div>
-
-      {properties.length > 0 ? (
-        <div className="bg-white dark:bg-slate-950 rounded-2xl border border-gray-200 dark:border-slate-800 overflow-hidden transition-colors">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-800">
-                  <th className="text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3">Property</th>
-                  <th className="text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3">Status</th>
-                  <th className="text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3">Price</th>
-                  <th className="text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3">Type</th>
-                  <th className="text-right text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider px-5 py-3">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-slate-800">
-                {properties.map((property: Record<string, string | number>) => (
-                  <tr key={property.id} className="hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <td className="px-5 py-4">
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">{property.title}</p>
-                      <p className="text-xs text-gray-500 dark:text-slate-500 mt-0.5">{property.address}</p>
-                    </td>
-                    <td className="px-5 py-4">
-                      <StatusBadge status={(property.status as string) || "active"} />
-                    </td>
-                    <td className="px-5 py-4">
-                      <p className="text-sm text-gray-900 dark:text-white">
-                        {formatPrice(property.price as number, property.country as string, property.currency as string)}
-                      </p>
-                    </td>
-                    <td className="px-5 py-4">
-                      <p className="text-sm text-gray-500 dark:text-slate-400 capitalize">{property.propertyType}</p>
-                    </td>
-                    <td className="px-5 py-4 text-right">
-                      <Link
-                        href={`/properties/${property.propertyCode}`}
-                        className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
-                      >
-                        View
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      ) : (
-        <EmptyState />
-      )}
+      <PageHeader title="My Properties" description="Manage your property listings"
+        onRefresh={() => { invalidateProperties(); refetchProperties(); }}
+        isRefreshing={loading}
+      >
+        <AddLink
+          to={PATHS.newProperty}
+          Icon={PlusIcon}
+          text="Add Property"
+        />
+      </PageHeader>
+      {content}
+      <ConfirmDialog
+        open={!!propertyToDelete}
+        onOpenChange={(open) => { if (!open) setPropertyToDelete(null); }}
+        title="Delete property"
+        description={`Are you sure you want to delete "${propertyToDelete?.title}"? This action cannot be undone.`}
+        confirmLabel="Delete"
+        loading={deleting}
+        onConfirm={() => {
+          if (propertyToDelete) deleteProperty({ variables: { id: propertyToDelete.id } });
+        }}
+      />
+      <Modal
+        open={!!selectedProperty}
+        onOpenChange={(open) => {
+          if (!open) {
+            clearSelectedProperty();
+            setCurrentImage(0);
+            setIsSaved(false);
+            setShowShareMenu(false);
+          }
+        }}
+        title={selectedProperty?.title ?? ""}
+        className="max-w-4xl"
+        bodyClassName="py-2"
+      >
+        {selectedProperty && (
+          <PropertyLeftColumn
+            property={selectedProperty}
+            photos={selectedProperty.photos ?? []}
+            currentImage={currentImage}
+            numberOfPhotos={selectedProperty.photos?.length ?? 0}
+            isSaved={isSaved}
+            showShareMenu={showShareMenu}
+            toggleGallery={() => {}}
+            toggleSaved={() => setIsSaved((s) => !s)}
+            toggleShareMenu={() => setShowShareMenu((s) => !s)}
+            prevImage={() => setCurrentImage((i) => (i - 1 + (selectedProperty.photos?.length ?? 1)) % (selectedProperty.photos?.length ?? 1))}
+            nextImage={() => setCurrentImage((i) => (i + 1) % (selectedProperty.photos?.length ?? 1))}
+            setCurrentImage={setCurrentImage}
+            formatPrice={formatPrice}
+            canViewLargeImage={false}
+          />
+        )}
+      </Modal>
     </div>
   );
 }

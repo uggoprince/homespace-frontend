@@ -6,6 +6,7 @@ import { useApolloClient } from '@apollo/client';
 import {
   destroyLocalStorage, getLocalStorage, getUserFromLocalStorage, setLocalStorage,
 } from '@/lib/localStorage';
+import { registerLogoutHandler } from '@/lib/apollo-client';
 
 interface User {
   firstname: string;
@@ -135,6 +136,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (itsThisPath('/')) {router.refresh();}
     else {router.replace('/login');}
   }, [clearStorage, client, router]);
+
+  useEffect(() => {
+    registerLogoutHandler(handleLogout);
+  }, [handleLogout]);
 
   const value = useMemo(() => ({
     token,

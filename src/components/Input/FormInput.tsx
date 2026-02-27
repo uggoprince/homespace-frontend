@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import React, { useState }  from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
@@ -20,6 +20,7 @@ interface FormInputProps<T extends FieldValues> {
   required?: boolean;
   autoComplete?: string;
   disabled?: boolean;
+  prefix?: React.ReactNode;
 }
 
 export const FormInput = <T extends FieldValues>({
@@ -34,6 +35,7 @@ export const FormInput = <T extends FieldValues>({
   autoComplete,
   className,
   disabled = false,
+  prefix,
 }: FormInputProps<T>) => {
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === "password";
@@ -43,12 +45,17 @@ export const FormInput = <T extends FieldValues>({
     name={name}
     render={({ field }) => (
       <FormItem className={cn(`mx-0.5`, className)}>
-        {label && <FormLabel className={labelClassName}>{label}</FormLabel>}
+        {label && <FormLabel className={labelClassName}>{label}{required && <span className="text-destructive"> *</span>}</FormLabel>}
         <FormControl className="">
           <div className="relative">
+            {prefix && (
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium text-sm pointer-events-none">
+                {prefix}
+              </span>
+            )}
             <Input
               type={isPassword && showPassword ? "text" : type}
-              className={cn(isPassword && "pr-10", inputClassName)}
+              className={cn(prefix && "pl-12", isPassword && "pr-10", inputClassName)}
               placeholder={placeholder}
               required={required}
               autoComplete={autoComplete}

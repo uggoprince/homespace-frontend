@@ -35,7 +35,7 @@ export default function AgencyPage() {
 
   const agency: Agency | null = data?.getAgencyByUsername || null;
 
-  if (error) return <ErrorHandler error={error} onRetry={() => refetch()} type="agency" />;
+  if (error) return <ErrorHandler error={error} onRetry={() => { refetch().catch(() => {}); }} type="agency" />;
 
   return (
     <div className="container w-full min-h-screen dark:text-white">

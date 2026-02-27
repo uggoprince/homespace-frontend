@@ -85,7 +85,7 @@ export const GET_PROPERTY_DETAILS = gql`
       status
       createdAt
       agency { id, name, address, username, email, phoneNumber }
-      photos { photo }
+      photos { id, photo }
       propertyCode
       rentPaymentPeriod
     }
@@ -112,9 +112,135 @@ export const GET_PROPERTY_DETAILS_BY_CODE = gql`
       status
       createdAt
       agency { id, name, address, username, email, phoneNumber }
-      photos { photo }
+      photos { id, photo }
       propertyCode
       rentPaymentPeriod
+    }
+  }
+`;
+
+export const CREATE_PROPERTY = gql`
+  mutation (
+    $agencyId: ID!
+    $title: String!
+    $description: String!
+    $country: String!
+    $state: String!
+    $address: String!
+    $price: Float!
+    $propertyType: String!
+    $units: Int!
+    $area: String
+    $bedRooms: Int
+    $bathRooms: Int
+    $postedBy: String!
+    $intent: String!
+    $rentPaymentPeriod: String
+    $currency: String
+    $files: [Upload!]
+  ) {
+    createProperty(
+      agencyId: $agencyId
+      title: $title
+      description: $description
+      country: $country
+      state: $state
+      address: $address
+      price: $price
+      propertyType: $propertyType
+      units: $units
+      area: $area
+      bedRooms: $bedRooms
+      bathRooms: $bathRooms
+      postedBy: $postedBy
+      intent: $intent
+      rentPaymentPeriod: $rentPaymentPeriod
+      currency: $currency
+      files: $files
+    ) {
+      id
+      propertyCode
+      title
+    }
+  }
+`;
+
+export const ADD_PROPERTY_PHOTO = gql`
+  mutation ($propertyId: ID!, $files: [Upload!]!) {
+    addPropertyPhoto(propertyId: $propertyId, files: $files) {
+      id
+      photo
+    }
+  }
+`;
+
+export const UPDATE_PROPERTY_PHOTO = gql`
+  mutation ($id: ID!, $files: [Upload!]!) {
+    updatePropertyPhoto(id: $id, files: $files) {
+      id
+      photo
+    }
+  }
+`;
+
+export const DELETE_PROPERTY_PHOTO = gql`
+  mutation ($id: ID!) {
+    deletePropertyPhoto(id: $id) {
+      message
+      status
+    }
+  }
+`;
+
+export const DELETE_PROPERTY = gql`
+  mutation ($id: ID!) {
+    deleteProperty(id: $id) {
+      message
+      count
+    }
+  }
+`;
+
+export const UPDATE_PROPERTY = gql`
+  mutation (
+    $id: ID!
+    $title: String
+    $description: String
+    $country: String
+    $state: String
+    $address: String
+    $price: Float
+    $propertyType: String
+    $units: Int
+    $area: String
+    $bedRooms: Int
+    $bathRooms: Int
+    $postedBy: String
+    $intent: String
+    $rentPaymentPeriod: String
+    $currency: String
+  ) {
+    updateProperty(
+      id: $id
+      title: $title
+      description: $description
+      country: $country
+      state: $state
+      address: $address
+      price: $price
+      propertyType: $propertyType
+      units: $units
+      area: $area
+      bedRooms: $bedRooms
+      bathRooms: $bathRooms
+      postedBy: $postedBy
+      intent: $intent
+      rentPaymentPeriod: $rentPaymentPeriod
+      currency: $currency
+    ) {
+      id
+      propertyCode
+      title
     }
   }
 `;

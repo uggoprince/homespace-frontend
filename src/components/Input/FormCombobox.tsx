@@ -93,6 +93,7 @@ export const FormCombobox = <T extends FieldValues>({
                           onValueChange?.(newValue)
                           setOpen(false)
                         }}
+                        className="data-[selected=true]:bg-main-500 data-[selected=true]:text-white"
                       >
                         <Check
                           className={cn(

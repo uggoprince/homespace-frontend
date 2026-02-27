@@ -2,10 +2,9 @@
 
 import { useQuery } from '@apollo/client';
 import { GET_AGENCY_PROPERTIES } from '@/lib/graphql/agency';
-import PropertyCard from '@/components/PropertyCard';
-import { PropertyCardSkeleton } from '@/components/PropertyCard/skeleton';
 import { Property } from '@/types/property';
 import ErrorHandler from '@/components/ErrorHandler';
+import { PropertyCard, PropertyCardSkeleton } from '@/components/Cards';
 
 const SKELETON_KEYS = ['s1', 's2', 's3', 's4', 's5', 's6'];
 

@@ -3,9 +3,8 @@
 import { useEffect, useState } from 'react';
 import { Property } from '@/types/property';
 import { Skeleton } from '@/components/ui/skeleton';
-import { PropertyCardSkeleton } from '@/components/PropertyCard/skeleton';
-import PropertyCard from '@/components/PropertyCard';
-import PropertyDetailsSideView from '@/components/PropertyDetails';
+import { PropertyCard, PropertyCardSkeleton } from '@/components/Cards';
+import PropertyDetailsSideView from '@/components/Property/PropertyDetailsSideView';
 import SearchPaginator from '@/components/SearchPaginator';
 import { usePropertyDetailsStore } from '@/stores/propertyDetailsStore';
 
