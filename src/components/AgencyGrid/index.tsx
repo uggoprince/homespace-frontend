@@ -2,8 +2,8 @@
 
 import { Agency } from '@/types/property';
 import { Skeleton } from '@/components/ui/skeleton';
-import { AgencyCardSkeleton } from '@/components/AgencyCard/skeleton';
-import AgencyCard from '@/components/AgencyCard';
+import { AgencyCardSkeleton } from '@/components/Cards/AgencyCard/skeleton';
+import AgencyCard from '@/components/Cards/AgencyCard';
 import SearchPaginator from '@/components/SearchPaginator';
 
 const SKELETON_KEYS = Array.from({ length: 9 }, (_, i) => `skeleton-${i}`);

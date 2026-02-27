@@ -5,8 +5,8 @@ import {
   Home, BedDouble, MapPin, Maximize, Eye,
 } from 'lucide-react';
 import countryToCurrency from 'country-to-currency';
-import { countryNameToCode } from '../../Utils/constants';
-import { propertyPath } from '../../Utils/paths';
+import { countryNameToCode } from '../../../Utils/constants';
+import { propertyPath } from '../../../Utils/paths';
 import './style.css';
 import { Property } from '@/types/property';
 import { usePropertyDetailsStore } from '@/stores/propertyDetailsStore';

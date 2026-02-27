@@ -29,7 +29,7 @@ const SearchBar = (props: SearchBarProps) => {
   }, [search]);
   if (!placeholder) placeholder = 'Search location, property type, ...';
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const trimmed = searchText.trim();
     if (trimmed) onSearch(trimmed);

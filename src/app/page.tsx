@@ -38,7 +38,7 @@ function SearchProperties({ searchQuery }: Readonly<{ searchQuery: string }>) {
     if (loading) window.scrollTo({ top: 0, behavior: 'auto' });
   }, [loading]);
 
-  if (error) return <ErrorHandler error={error} onRetry={() => refetch()} />;
+  if (error) return <ErrorHandler error={error} onRetry={() => { refetch().catch(() => {}); }} />;
 
   const result: PropertiesResult = data?.getPropertiesAndFilter || { properties: [], count: 0 };
 
@@ -71,7 +71,7 @@ function HomeProperties() {
     if (loading) window.scrollTo({ top: 0, behavior: 'auto' });
   }, [loading]);
 
-  if (error) return <ErrorHandler error={error} onRetry={() => refetch()} type="property" />;
+  if (error) return <ErrorHandler error={error} onRetry={() => { refetch().catch(() => {}); }} type="property" />;
 
   const result: PropertiesResult = data?.getPropertiesAndFilter || { properties: [], count: 0 };
 

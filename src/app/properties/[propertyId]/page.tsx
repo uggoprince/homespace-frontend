@@ -11,8 +11,8 @@ import { formatPrice } from '@/Utils/formatters';
 import ErrorHandler from '@/components/ErrorHandler';
 import ContactButtons from '@/components/ContactButtons';
 import { Property } from '@/types/property';
-import FullscreenGallery from './FullscreenGallery';
-import PropertyLeftColumn from './PropertyLeftColumn';
+import FullscreenGallery from '../../../components/Property/FullscreenGallery';
+import PropertyLeftColumn from '../../../components/Property/PropertyLeftColumn';
 import { PropertySkeleton } from './Skeleton';
 
 const emptySubscribe = () => () => {};

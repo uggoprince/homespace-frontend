@@ -253,5 +253,18 @@ export const countryNameToCode: { [key: string]: string } = {
   'Åland Islands': 'AX',
 };
 
-export const getCountriesApiUrl = 'https://laravel-world.com/api/countries?fields=iso2';
-export const getCountryStatesApiUrl = 'https://laravel-world.com/api/states?filters[country_code]=';
+export const propertyTypesList = [
+  'Apartment', 'Duplex', 'Bungalow', 'Detached House', 'Semi-Detached House',
+  'Terrace', 'Penthouse', 'Studio', 'Flat', 'Maisonette', 'Villa',
+  'Commercial Space', 'Office Space', 'Shop', 'Warehouse', 'Land',
+];
+
+export const BEDROOM_OPTIONS = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+export const BATHROOM_OPTIONS = ['1', '2', '3', '4', '5', '6', '7'];
+
+export const rentPeriods = [
+  { value: 'daily', label: 'Daily' },
+  { value: 'weekly', label: 'Weekly' },
+  { value: 'monthly', label: 'Monthly' },
+  { value: 'yearly', label: 'Yearly' },
+];
