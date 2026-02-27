@@ -1,4 +1,4 @@
-import { XIcon } from "lucide-react";
+import { Loader2, XIcon } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -15,6 +15,8 @@ interface ModalAction {
   onClick: () => void;
   variant?: React.ComponentProps<typeof Button>["variant"];
   className?: string;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 interface ModalProps {
@@ -104,7 +106,9 @@ export default function Modal({
                 variant={action.variant ?? "default"}
                 className={action.className}
                 onClick={action.onClick}
+                disabled={action.disabled ?? action.loading}
               >
+                {action.loading && <Loader2 className="w-4 h-4 animate-spin" />}
                 {action.label}
               </Button>
             )}

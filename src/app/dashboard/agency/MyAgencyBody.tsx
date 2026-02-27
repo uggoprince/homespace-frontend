@@ -7,9 +7,8 @@ import { GET_USER_AGENCY, UPDATE_BANNER } from "@/lib/graphql/agency";
 import { useDashboardStore } from "@/stores/dashboardStore";
 import ErrorHandler from "@/components/ErrorHandler";
 import Modal from "@/components/Modal";
-import { Button } from "@/components/ui/button";
 import { showToast } from "@/components/Toast";
-import { Check, Eye, Loader2, Mail, MapPin, Pencil, Phone, Upload } from "lucide-react";
+import { Check, Eye, Mail, MapPin, Pencil, Phone } from "lucide-react";
 import {
   FaFacebook, FaWhatsapp, FaTwitter, FaInstagram,
 } from 'react-icons/fa';
@@ -261,18 +260,15 @@ export default function MyAgencyBody() {
         open={dialogOpen}
         onOpenChange={handleDialogClose}
         title="Upload Banner"
-        className="sm:max-w-xl"
-        actions={
-          <>
-            <Button variant="outline" onClick={() => handleDialogClose(false)} disabled={uploading}>
-              Cancel
-            </Button>
-            <Button onClick={handleUpload} disabled={uploading}>
-              {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
-              {uploading ? 'Uploading...' : 'Upload'}
-            </Button>
-          </>
-        }
+        className="sm:max-w-3xl"
+        cancelLabel="Cancel"
+        onCancel={() => handleDialogClose(false)}
+        action={{
+          label: uploading ? 'Uploading...' : 'Upload',
+          onClick: handleUpload,
+          loading: uploading,
+          disabled: uploading,
+        }}
       >
         {bannerPreview && (
           <div className="rounded-lg overflow-hidden bg-gray-100 dark:bg-slate-800">
