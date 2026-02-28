@@ -225,7 +225,7 @@ const LandingNavigation = ({ user }: { user: User | null }) => {
 
   return (
     <NavBlock>
-      {showPropsLink && 
+      {showPropsLink && savedQuery &&
         <HSLink path={propertiesPath}
           text="Properties"
           Icon={Building}
@@ -257,7 +257,7 @@ const Navigation = () => {
   const mounted = useIsMounted();
   const initialAuth = useInitialAuth();
   const { token, logout, user } = useAuth() || {};
-  const isAuthenticated = mounted ? (!!token || initialAuth.isAuthenticated) : initialAuth.isAuthenticated;
+  const isAuthenticated = mounted ? !!token : initialAuth.isAuthenticated;
 
   if (isAuthenticated) return <HomeNavigation user={user as User | null} logout={logout!} hasAgency={initialAuth.hasAgency} />;
   return <LandingNavigation user={user as User | null} />;

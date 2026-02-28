@@ -167,7 +167,7 @@ function buildPropertyColumns(onDelete: (p: Property) => void): TableColumn<Prop
 export default function MyPropertiesPage() {
   const {
     agency: storedAgency, agencyFetched, setAgency,
-    properties: storedProperties, setProperties, invalidateProperties,
+    properties: storedProperties, propertiesFetched, setProperties, invalidateProperties,
   } = useDashboardStore();
 
   const { selectedProperty, setSelectedProperty, clearSelectedProperty } = usePropertyDetailsStore();
@@ -217,7 +217,7 @@ export default function MyPropertiesPage() {
 
   const propertyColumns = buildPropertyColumns(setPropertyToDelete);
 
-  const loading = (!agencyFetched && agencyLoading) || propertiesLoading;
+  const loading = (!agencyFetched && agencyLoading) || (!propertiesFetched && propertiesLoading);
 
   if (agencyError) return <ErrorHandler error={agencyError} showBackButton={false} onRetry={() => { refetchAgency(); }} />;
   if (error) return <ErrorHandler error={error} showBackButton={false} onRetry={() => refetchProperties()} />;
