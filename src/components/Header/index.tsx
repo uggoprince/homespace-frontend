@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { LuX } from 'react-icons/lu';
@@ -88,7 +88,8 @@ const AddSearchBar = () => {
   const { token } = useAuth() || {};
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const hasToken = !!token || initialAuth.isAuthenticated;
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
+  const hasToken = mounted ? !!token : initialAuth.isAuthenticated;
 
   const propertySearch = searchParams.get('q') || '';
   const agencySearch = searchParams.get('search') || '';
